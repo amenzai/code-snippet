@@ -1,0 +1,33 @@
+.gallery li:nth-child(2){
+	-webkit-filter:grayscale(1);
+}
+.gallery li:nth-child(3){
+	-webkit-filter:sepia(1);
+}
+.gallery li:nth-child(4){
+	-webkit-filter:saturate(0.5);
+}
+.gallery li:nth-child(5){
+	-webkit-filter:hue-rotate(90deg);
+}
+.gallery li:nth-child(6){
+	-webkit-filter:invert(1);
+}
+.gallery li:nth-child(7){
+	-webkit-filter:opacity(0.2);
+}
+.gallery li:nth-child(8){
+	-webkit-filter:blur(3px);
+}
+.gallery li:nth-child(9){
+	-webkit-filter:drop-shadow(5px 5px 5px #ccc);
+}
+.gallery li:nth-child(10){
+	 -webkit-filter: saturate(6) hue-rotate(361deg) brightness(.09);
+}
+
+/*去色加模糊*/
+.gallery:hover li:not(:hover){
+	 -webkit-filter: blur(2px) grayscale(1);
+		opacity: .7; 
+}

@@ -1,0 +1,23 @@
+.radio label input {
+	position: absolute;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	z-index: -1;
+}
+
+.checkbox label input {
+	position: absolute;
+	filter: alpha(opacity=0);
+	opacity: 0;
+	z-index: -1;
+}
+
+.radio .icon,
+.checkbox .icon {
+	display: none;
+}
+
+.radio .active .icon,
+.checkbox .active .icon {
+	display: inline-block;
+}

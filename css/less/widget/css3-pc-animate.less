@@ -1,0 +1,454 @@
+.bounce,
+.bounce-hover,
+.flash,
+.flash-hover,
+.shake,
+.shake-hover,
+.swing,
+.swing-hover,
+.wobble,
+.wobble-hover,
+.ring,
+.ring-hover {
+	animation: 1s ease;
+}
+
+.fadein,
+.fadein-top,
+.fadein-right,
+.fadein-bottom,
+.fadein-left,
+.bouncein,
+.rotatein {
+	animation: 1s ease-out backwards;
+}
+
+.fadeout,
+.fadeout-top,
+.fadeout-right,
+.fadeout-bottom,
+.fadeout-left,
+.bounceout,
+.rotateout {
+	animation: 1s ease-in forwards;
+}
+
+.rotate,
+.rotate-hover {
+	animation: 2s infinite linear;
+}
+
+
+/*渐变-淡入*/
+
+.fadein {
+	animation-name: a-fadein;
+}
+@keyframes a-fadein {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+/*淡入-从上*/
+
+.fadein-top {
+	animation-name: fadeinT;
+}
+@keyframes fadeinT {
+	0% {
+		opacity: 0;
+		transform: translateY(-50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+/*淡入-从右*/
+
+.fadein-right {
+	animation-name: fadeinR;
+}
+@keyframes fadeinR {
+	0% {
+		opacity: 0;
+		transform: translateX(50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+
+/*淡入-从下*/
+
+.fadein-bottom {
+	animation-name: fadeinB;
+}
+@keyframes fadeinB {
+	0% {
+		opacity: 0;
+		transform: translateY(50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
+/*淡入-从左*/
+
+.fadein-left {
+	animation-name: fadeinL;
+}
+@keyframes fadeinL {
+	0% {
+		opacity: 0;
+		transform: translateX(-50px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+
+/*渐变-淡出*/
+
+.fadeout {
+	animation-name: a-fadeout;
+}
+@keyframes a-fadeout {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+
+/*淡出-向上*/
+
+.fadeout-top {
+	animation-name: fadeoutT;
+}
+@keyframes fadeoutT {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(-100px);
+	}
+}
+
+
+/*淡出-向右*/
+
+.fadeout-right {
+	animation-name: fadeoutR;
+}
+@keyframes fadeoutR {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(100px);
+	}
+}
+
+
+/*淡出-向下*/
+
+.fadeout-bottom {
+	animation-name: fadeoutB;
+}
+@keyframes fadeoutB {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateY(100px);
+	}
+}
+
+
+/*淡出-向左*/
+
+.fadeout-left {
+	animation-name: fadeoutL;
+}
+@keyframes fadeoutL {
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	100% {
+		opacity: 0;
+		transform: translateX(-100px);
+	}
+}
+
+
+/*弹跳*/
+
+.bounce,
+.bounce-hover:hover {
+	animation-name: a-bounce;
+}
+@keyframes a-bounce {
+	0%,
+	20%,
+	50%,
+	80%,
+	100% {
+		transform: translateY(0);
+	}
+	40% {
+		transform: translateY(-30px);
+	}
+	60% {
+		transform: translateY(-15px);
+	}
+}
+
+
+/*弹入*/
+
+.bouncein {
+	animation-name: a-bouncein;
+}
+@keyframes a-bouncein {
+	0% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.05);
+	}
+	70% {
+		transform: scale(0.9);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
+
+/*弹出*/
+
+.bounceout {
+	animation-name: a-bounceout;
+}
+@keyframes a-bounceout {
+	0% {
+		transform: scale(1);
+	}
+	25% {
+		transform: scale(0.95);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.1);
+	}
+	100% {
+		opacity: 0;
+		transform: scale(0.3);
+	}
+}
+
+
+/*转入*/
+
+.rotatein {
+	animation-name: a-rotatein;
+}
+@keyframes a-rotatein {
+	0% {
+		opacity: 0;
+		transform: rotate(-200deg);
+	}
+	100% {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+
+/*转出*/
+
+.rotateout {
+	animation-name: a-rotateout;
+}
+@keyframes a-rotateout {
+	0% {
+		transform-origin: center center;
+		transform: rotate(0);
+		opacity: 1;
+	}
+	100% {
+		transform-origin: center center;
+		transform: rotate(200deg);
+		opacity: 0;
+	}
+}
+
+
+/*闪烁*/
+
+.flash,
+.flash-hover:hover {
+	animation-name: a-flash;
+}
+@keyframes a-flash {
+	0%,
+	50%,
+	100% {
+		opacity: 1;
+	}
+	25%,
+	75% {
+		opacity: 0;
+	}
+}
+
+
+/*震颤*/
+
+.shake,
+.shake-hover:hover {
+	animation-name: a-shake;
+}
+@keyframes a-shake {
+	0%,
+	100% {
+		transform: translateX(0);
+	}
+	10%,
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: translateX(-10px);
+	}
+	20%,
+	40%,
+	60%,
+	80% {
+		transform: translateX(10px);
+	}
+}
+
+/*摇摆*/
+
+.swing,
+.swing-hover:hover {
+	animation-name: a-swing;
+}
+@keyframes a-swing {
+	20% {
+		transform: rotate(15deg);
+	}
+	40% {
+		transform: rotate(-10deg);
+	}
+	60% {
+		transform: rotate(5deg);
+	}
+	80% {
+		transform: rotate(-5deg);
+	}
+	100% {
+		transform: rotate(0);
+	}
+}
+
+/*摇晃*/
+
+.wobble,
+.wobble-hover:hover {
+	animation-name: a-wobble;
+}
+@keyframes a-wobble {
+	0% {
+		transform: translateX(0);
+	}
+	15% {
+		transform: translateX(-50px) rotate(-5deg);
+	}
+	30% {
+		transform: translateX(40px) rotate(3deg);
+	}
+	45% {
+		transform: translateX(-33px) rotate(-3deg);
+	}
+	60% {
+		transform: translateX(10px) rotate(2deg);
+	}
+	75% {
+		transform: translateX(-10px) rotate(-1deg);
+	}
+	100% {
+		transform: translateX(0);
+	}
+}
+
+/*震铃*/
+
+.ring,
+.ring-hover:hover {
+	animation-name: a-ring;
+}
+@keyframes a-ring {
+	0% {
+		transform: scale(1);
+	}
+	10%,
+	20% {
+		transform: scale(0.9) rotate(-3deg);
+	}
+	30%,
+	50%,
+	70%,
+	90% {
+		transform: scale(1.1) rotate(3deg);
+	}
+	40%,
+	60%,
+	80% {
+		transform: scale(1.1) rotate(-3deg);
+	}
+	100% {
+		transform: scale(1) rotate(0);
+	}
+}
+
+/*旋转*/
+
+.rotate,
+.rotate-hover:hover {
+	animation-name: a-rotate;
+}
+@keyframes a-rotate {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(359deg);
+	}
+}

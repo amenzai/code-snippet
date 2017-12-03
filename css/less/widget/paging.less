@@ -1,0 +1,50 @@
+.paging li {
+	display: inline-block;
+	// border: solid 1px #ddd;
+}
+
+.paging a {
+	color: #333;
+	padding: 8px 12px;
+	line-height: 18px;
+	display: block;
+	// transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;
+}
+
+.paging .disabled a:link,
+.paging .disabled a:visited,
+.paging .disabled a:hover {
+	cursor: not-allowed;
+	pointer-events: none;
+	color: #ddd;
+}
+
+.paging .active {
+	pointer-events: none;
+}
+
+.paging .active,
+.paging a:hover {
+	background: #f5f5f5;
+}
+
+// .prev,
+// .next {
+// 	font-size: 36px;
+// 	padding: 0;
+// 	color: #ddd;
+// 	border: solid 1px #ddd;
+// 	background-color: rgba(255, 255, 255, .2);
+// 	width: 50px;
+// 	height: 50px;
+// 	line-height: 45px;
+// 	display: inline-block;
+// 	border-radius: 50%;
+// 	text-align: center;
+// 	cursor: pointer;
+// }
+
+// .prev:hover,
+// .next:hover {
+// 	background-color: rgba(0, 0, 0, .2);
+// }

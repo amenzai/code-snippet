@@ -1,0 +1,57 @@
+/*父容器*/
+/*div {
+  width: 100%;
+  display: flex;
+}*/
+
+/*flex-direction: column;*  子元素排列方式/
+/*flex-direction: row-reverse;*/
+/*row 设置从左到右排列
+row-reverse 设置从右到左排列
+column 设置从上到下排列
+column-reverse 设置从下到上排列*/
+
+/*flex-wrap: wrap;* 自动换行/
+nowrap 默认值，都在一行或一列显示
+wrap 伸缩项目无法容纳时，自动换行
+wrap-reverse 伸缩项目无法容纳时，自动换行，方向和wrap 相反
+
+/*flex-flow: row wrap;* 上两种的结合写法/
+
+子元素的对齐方式
+/*justify-content: center;
+          /*flex-start 伸缩项目以起始点靠齐
+          flex-end 伸缩项目以结束点靠齐
+          center 伸缩项目以中心点靠齐
+          space-between 伸缩项目平局分布
+          space-around 同上，但两端保留一半的空间*/
+
+/*处理伸缩项目的额外空间*/
+/*align-items:  center;
+        flex-start 伸缩项目以顶部为基准，清理下部额外空间
+        flex-end 伸缩项目以底部为基准，清理上部额外空间
+        center 伸缩项目以中部为基准，平均清理上下部额外空间
+        baseline 伸缩项目以基线为基准，清理额外的空间
+        stretch 伸缩项目填充整个容器，默认
+
+/*以上都为父容器内容*/
+
+/*同上,值都一样 处理其中一个元素*/
+// p:nth-child(1) {align-self:center;}
+
+
+
+
+/*子元素*/
+/*p:nth-child(1) {
+  flex: 1;
+  order: 3;
+}
+p:nth-child(2) {
+  flex: 3;
+  order: 2;
+}
+p:nth-child(3) {
+  flex: 1;
+  order: 1;
+}

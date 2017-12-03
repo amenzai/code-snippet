@@ -1,0 +1,71 @@
+// 按钮
+.btn {
+	border: 1px solid #ddd;
+	background: transparent;
+	font-size: 16px;
+	margin: 0;
+	padding: 10px 30px;
+	display: inline-block;
+	line-height: 20px;
+	// transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;
+	cursor: pointer;
+}
+
+.btn[disabled] {
+	pointer-events: none;
+	cursor: not-allowed;
+	box-shadow: none;
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+
+.btn-block {
+	display: block;
+	width: 100%;
+}
+
+.btn.bg-main,
+.btn.bg-sub,
+.btn.bg-dot {
+	color: #fff;
+}
+
+.btn:active {
+	background-image: none;
+	outline: 0;
+	// transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1) 0s;
+}
+
+.btn:hover,
+.btn:focus,
+.btn.bg:hover,
+.btn.bg:focus {
+	background-color: #f5f5f5;
+}
+
+.btn.bd-main:hover,
+.btn.bd-main:focus,
+.btn.bg-main:hover,
+.btn.bg-main:focus {
+	color: #fff;
+	border-color: @mainColor-dark;
+	background-color: @mainColor-dark;
+}
+
+// 按钮组
+
+.button-group {
+	display: inline-block;
+	position: relative;
+	vertical-align: middle;
+}
+
+.button-group .btn {
+	float: left;
+	position: relative;
+	font-weight: normal;
+}
+
+.button-group .btn {
+	margin-left: -1px;
+}

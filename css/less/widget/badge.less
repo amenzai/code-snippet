@@ -1,0 +1,29 @@
+.badge {
+	display: inline-block;
+	min-width: 10px;
+	padding: 3px 7px;
+	font-size: 12px;
+	line-height: 1;
+	color: #fff;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: baseline;
+	background-color: #999;
+	border-radius: 2em;
+}
+
+.badge:empty {
+	display: none
+}
+
+.badge-corner {
+	position: relative;
+}
+
+.badge-corner .badge {
+	position: absolute;
+	right: -10px;
+	top: -9px;
+	font-weight: normal;
+	cursor: pointer;
+}
