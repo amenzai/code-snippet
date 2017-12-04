@@ -1,3 +1,26 @@
 整理的一些常用代码段。
 
-less js等
+## 目录
+
+- [js](./js)
+  - [ajax相关代码段](./js/ajax.md)
+  - [jsonp的实现](./js/jsonp.md)
+  - [jqueryAPI](./js/jquery.md)
+  - [cookie封装](./js/cookie.md)
+  - [WebSocket使用](./js/WebSocket.md)
+  - [ES6简单整理](./js/ES6.md)
+  - [base64编码封装](./js/base64.md)
+  - [日期格式化模块封装](./js/dateFormat.md)
+  - [数值格式化模块封装](./js/numberFormat.md)
+  - [对象序列化模块封装](./js/querystring.md)
+  - [字符串删除左右空格模块封装](./js/stringTrim.md)
+  - [常用正则表达式](./js/regExp.md)
+  - [vue代码段](./js/vue-snippet.md)
+  - [vuex整理](./js/vue-store.md)
+- [css](./css)
+  - [resetCSS](./css/resetCss.md)
+  - [音乐APP Less文件](./css/music-appCss.md)
+  - [我的less段](./css/less)
+  - [NEC](./css/NEC)
+  - [webapp](./css/webapp)
+- [常用命令](./order.md)
