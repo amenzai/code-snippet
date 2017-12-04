@@ -51,7 +51,8 @@ $ git push -u origin master
 $ git pull origin master
 
 $ git status -s # 输出简要的变更日志
-$ git diff # 对比当前状态和版本库中状态的变化
+$ git diff # 对比工作区和版本库（文件在暂存区则与暂存区对比）的变化
+git diff --staged # 比较暂存区和版本库差异
 $ git log # 可以查看提交日志
 $ git reset --hard xxxxxx # 回归到指定版本
 $ git branch # 查看仓库有哪些分支以及当前处于哪个分支
@@ -59,58 +60,68 @@ $ git branch V2 # 创建一个V2分支
 $ git checkout V2 # 切换到V2分支
 git checkout -b dev # 创建后切换
 $ git push -u origin V2 # 提交到V2分支
-git reset HEAD readme.txt # 撤销add
-git checkout -- readme.txt # 撤销工作区修改
+git reset <file> # 从暂存区恢复到工作文件
+git reset -- . # 从暂存区恢复到工作文件
+git checkout -- readme.txt # 撤销工作区对应文件修改
+git co . # 抛弃工作区修改
+# git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+
+git push origin <local_branch>:<remote_branch> # 创建远程分支
 git merge dev # 合并指定分支到当前分支
-git branch -d dev # 删除分支
-
-git log --graph #查看分支合并图
-
 git merge --no-ff -m "merge with no-ff" dev
-
+git branch -d dev # 删除分支
+git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
+git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
+git log --graph #查看分支合并图
+git stash # 暂存
+git stash list # 列所有stash
+git stash apply # 恢复暂存的内容
+git stash drop # 删除暂存区
+git checkout -b branch-name origin/branch-name # 在本地创建和远程分支对应的分支
+git branch --set-upstream branch-name origin/branch-name # 建立本地分支和远程分支的关联
 ```
 
-# Node NPM常用命令
+## Node NPM常用命令
 
 ```bash
-nvm install node #安装最新版本
-nvm use vx.x.x 32or64 #使用哪个版本
-nvm install vx.x.x  #安装
-nvm uninstall vx.x.x #卸载
-nvm list #查看本地已经安装版本
-nvm ls-remote #查看服务器上所有可供安装的版本
+nvm install node # 安装最新版本
+nvm use vx.x.x 32or64 # 使用哪个版本
+nvm install vx.x.x  # 安装
+nvm uninstall vx.x.x # 卸载
+nvm list # 查看本地已经安装版本
+nvm ls-remote # 查看服务器上所有可供安装的版本
 
-npm config ls #列出prefix配置
-npm config set cache “C:\dev\nvm\npm-cache” #设置全局缓存文件夹
-npm config set prefix “C:\dev\nvm\npm” #设置全局模块文件夹
-npm install #安装package.json中的包以及依赖包
+npm config ls # 列出prefix配置
+npm config set cache “C:\dev\nvm\npm-cache” # 设置全局缓存文件夹
+npm config set prefix “C:\dev\nvm\npm” # 设置全局模块文件夹
+npm install # 安装package.json中的包以及依赖包
 npm init # 初始化操作，给项目添加一个配置文件(package.json)
-npm install xxx@0.1.1 #安装一个包，默认安装最新稳定版本
-npm install -g xxx #安装包到全局
+npm install xxx@0.1.1 # 安装一个包，默认安装最新稳定版本
+npm install -g xxx # 安装包到全局
 npm install xxx --save # 保存在package.json中的普通依赖节点
 npm install xxx --save-dev # 保存在package.json中的开发依赖节点
-
-npm list
-npm list -global
-
+npm list # 列举本地包
+npm list -global #列举全局包
+npm config set registry https://registry.npm.taobao.org/
+npm config get registry
 # 更新
 $ npm update -g bower
 # 卸载
 $ npm uninstall --global bower
 
-node #进入REPL环境
-.exit #退出REPL环境
-node --use_strict #严格模式
-node -e 'console.log("hello,world")' #执行脚本字符串
-特殊变量下划线（_）表示上一个命令的返回结果
-#运行脚本文件
+node # 进入REPL环境
+.exit # 退出REPL环境
+node --use_strict # 严格模式
+node -e 'console.log("hello,world")' # 执行脚本字符串
+# 特殊变量下划线（_）表示上一个命令的返回结果
+# 运行脚本文件
 node index.js
 node path/index.js
 node path/index
-node --help #查看帮助
+node --help # 查看帮助
 ```
 
-# hexo命令
+## hexo命令
 
 ```bash
 npm install hexo-cli -g
@@ -122,33 +133,28 @@ hexo server
 hexo new [layout] “postName” 
 hexo new page “页面名称”
 
-
 title: postName #文章页面上的显示名称，可以任意修改，不会出现在URL中
 date: 2013-12-02 15:30:16 #文章生成时间，一般不改，当然也可以任意修改
 categories: #文章分类目录，可以为空，注意:后面有个空格
 tags: #文章标签，可空，多标签请用格式[tag1,tag2,tag3]，注意:后面有个空格
 ```
 
-# ionic命令
+## ionic命令
 
 ```bash
 npm install -g cordova ionic
-
 ionic start myApp tabs --v2 
-
 cd myApp
-
 ionic serve
-
 ionic info
 
-//添加项目平台
+# 添加项目平台
 ionic platform add android
 
-//打包
+# 打包
 ionic build android
 
-//直接运行在手机
+# 直接运行在手机
 ionic run android
 
 ionic emulate android
@@ -156,14 +162,14 @@ ionic emulate android
 http://view.ionic.io
 ```
 
-# jade常用命令
+## jade常用命令
 
 ```bash
-jade index.jade  #编译后备压缩
-jade index.jade -P  #编译文件为jade.html并且格式化了 放在相同的目录。
-jade index.jade -P -w #实时编译
-jade index.jade -P -w --obj '{"course","jade"}' #想文档中传递变量 优先级最低。
-jade index.jade -P -O jade.json #通过json想文档传递数据
+jade index.jade  # 编译后备压缩
+jade index.jade -P  # 编译文件为jade.html并且格式化了 放在相同的目录。
+jade index.jade -P -w # 实时编译
+jade index.jade -P -w --obj '{"course","jade"}' # 向文档中传递变量 优先级最低。
+jade index.jade -P -O jade.json # 通过json想文档传递数据
 jade --client --no-debug runtime.jade
 html2jade http://twitter.com
 
@@ -172,3 +178,52 @@ html2jade mywebpage.html # outputs mywebpage.jade
 html2jade public/*.html  # converts all .html files to .jade
 ```
 
+## babel
+
+```bash
+# 全局安装
+npm install -g babel-cli
+
+# 转码结果输出到标准输出
+$ babel example.js
+
+# 转码结果写入一个文件
+# --out-file 或 -o 参数指定输出文件
+$ babel example.js --out-file compiled.js
+# 或者
+$ babel example.js -o compiled.js
+
+# 整个目录转码
+# --out-dir 或 -d 参数指定输出目录
+$ babel src --out-dir lib
+# 或者
+$ babel src -d lib
+
+# -s 参数生成source map文件
+$ babel src -d lib -s
+```
+
+## ESLint
+```bash
+npm install --save-dev eslint babel-eslint
+
+# .eslint
+{
+  "parser": "babel-eslint",
+  "rules": {
+    ...
+  }
+}
+
+# package.json
+{
+    "name": "my-module",
+    "scripts": {
+      "lint": "eslint my-files.js"
+    },
+    "devDependencies": {
+      "babel-eslint": "...",
+      "eslint": "..."
+    }
+  }
+```
