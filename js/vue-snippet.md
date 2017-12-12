@@ -90,7 +90,7 @@ export default {
 ## 路由
 ```js
 import VueRouter from 'vue-router'
-Vue.use(Router)
+Vue.use(VueRouter)
 import User from './user'
 const routes = [{
   path: '/',
@@ -192,7 +192,7 @@ router.push({ path: 'register', query: { plan: 'private' }})
 
 const userId = 123
 router.push({ name: 'user', params: { userId }}) // -> /user/123
-router.push({ path: `/user+userId}` }) // -> /user/123
+router.push({ path: `/user/${userId}` }) // -> /user/123
 // 这里的 params 不生效
 router.push({ path: '/user', params: { userId }}) // -> /user
 
