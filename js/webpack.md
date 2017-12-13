@@ -59,11 +59,15 @@ npm install webpack webpack-dev-server --save-dev
 const path = require('path');
 const OpenBrowserPlugin = require('open-browser-webpack-plugin');
 
+function resolve (dir) {
+  return path.join(__dirname, dir)
+}
+
 module.exports = {
   devtool:"eval-source-map",
-  entry: path.resolve(__dirname, 'app/main.js'),
+  entry: resolve('src/main.js'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve('dist'),
     publicPath: '/',
     filename: './bundle.js'
   },
@@ -81,16 +85,19 @@ module.exports = {
         test: /\.css$/,
         loader: 'style-loader!css-loader?modules'
       }, {
-        test: /\.ttf$/,
-        loader: 'url?limit=100000'
+        test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+        loader: 'url-loader?limit=100000'
       }, {
-        test:/\.(png|jpg|gif)$/,
+        test:/\.(png|jpg|gif|svg)$/,
         loader:"url-loader?limit=8129"
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      '@': resolve('src')
+    }
   },
   plugins: [
     new OpenBrowserPlugin({ url: 'http://localhost:8080' })

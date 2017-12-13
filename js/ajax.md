@@ -356,3 +356,16 @@ axios.interceptors.response.use(function (response) {
 
 ```
 
+## fetch
+```js
+// 在react中使用
+var myFetchOptions = {
+  method: 'GET'
+};
+fetch("http://newsapi.gugujiankong.com/Handler.ashx?action=getnewsitem&uniquekey=" + this.props.params.uniquekey, myFetchOptions).then(response => response.json()).then(json => {
+  this.setState({ newsItem: json });
+  document.title = this.state.newsItem.title;
+});
+```
+详细查看：https://developer.mozilla.org/zh-CN/docs/Web/API/Fetch_API/Using_Fetch
+
