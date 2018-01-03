@@ -24,6 +24,13 @@ const arrCopy = [...arr];
 const objCopy = {...obj};
 ```
 
+### 计算属性
+
+```js
+const name = 'tom'; 
+const obj = {[name]: 'hello'} // {tom:'hello'}
+```
+
 ### 使用Array.from方法，将类似数组的对象转为数组。
 ```js 
 const foo = document.querySelectorAll('.foo');

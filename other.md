@@ -7,3 +7,17 @@ JS动画三要素：
 setInterval(func,delay) setTimeout(func,delay) requestAnimationFrame(func)
 
 常见动画：形变、位移、旋转、透明度
+
+------
+node express mongodb 
+```bash
+# node应用自动刷新
+npm install -g nodemon node
+
+nodemon demo.js
+
+# mongodb使用
+mongod --config /user/local/etc/mongod.conf
+
+mongo
+```

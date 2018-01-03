@@ -23,6 +23,7 @@
   - [webpack使用](./js/webpack.md)
   - [gulp-plugins](./js/gulp-plugins.md)
   - [redux基本用法](./js/redux.md)
+  - [js基础-面试](./js-base.md)
 - [css](./css)
   - [resetCSS](./css/resetCss.md)
   - [音乐APP Less文件](./css/music-appCss.md)
