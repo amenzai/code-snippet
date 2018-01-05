@@ -132,3 +132,128 @@ npm install react-router-dom --save
 - Switch只渲染命中的第一个子Route组件
 
 Route组件在匹配到对应组件后，组件内部this.props可以拿到一个关于路由信息的对象，它有三个属性：history match location
+
+------
+
+开发思路：
+- Demo.js (一个组件)
+	
+```js
+import React from 'react'
+import { connect } from 'react-redux' // 引入redux
+
+import { login,getUserData } from './demo.redux' // 引入action creater
+
+import {Redirect} from 'react-router-dom' // 路由组件
+
+import axios from 'axios
+
+// 状态管理 state映射到props
+@connect(
+	state=>state.auth, // reducer中定义的state
+	{login, getUserData} // action creater
+)
+
+class Demo extends React.Component{
+	// constructor(props) {
+	// 	super(props)
+	// 	this.state={
+	// 		data:{}
+	// 	}
+	// }
+	componentDidMount() {
+		this.props.getUserData()
+		// axios.get('/data')
+		// 	.then(res=>{
+		// 		if (res.status===200) {
+		// 			this.setState({data:res.data})
+		// 		}
+		// 	})	
+	}
+	render(){
+		return (
+			<div>
+				<h2>我的名字是{this.props.user},年龄{this.props.age}</h2>
+				{ this.props.isAuth? <Redirect to='/dashboard' /> : null}
+				<h2>你没有权限，需要登录才能看</h2>
+				<button onClick={this.props.login}>登录</button>
+			</div>
+		)
+	}
+}
+
+export default Demo
+
+```
+
+- demo.redux.js (定义reducer 和 action creater)
+
+```js 
+import axios from 'axios'
+
+const LOGIN = 'LOGIN'
+const LOGOUT = 'LOGOUT'
+const USER_DATA='USER_DATA'
+const initState = {
+	isAuth:false,
+	user:'李云龙',
+	age:20
+}
+export function auth(state=initState,action){
+	console.log(state,action)
+	switch(action.type){
+		case LOGIN:
+			return {...state, isAuth:true}
+		case LOGOUT:
+			return {...state, isAuth:false}
+		case USER_DATA:
+			return {...state, user:action.payload.user,age:action.payload.age}
+		default:	
+			return state	
+	}
+}
+// action
+export function getUserData(){
+	// dispatch用来通知数据修改
+	return dispatch=>{
+		axios.get('/data')
+			.then(res=>{
+				if (res.status===200) {
+					dispatch(userData(res.data))
+				}
+			})
+	}
+}
+export function userData(data){
+	return {type:USER_DATA,payload:data}
+}
+export function login(){
+	return {type:LOGIN}
+}
+export function logout(){
+	return {type:LOGOUT}
+}
+```
+
+- redux.js
+
+```js
+// 合并所有reducer 并且返回
+import { combineReducers } from 'redux'
+import { counter } from './index.redux'
+import { auth } from './Auth.redux'
+
+export default combineReducers({counter,auth})
+```
+
+- index.js
+
+```js
+const store = createStore(reducers, compose(
+	applyMiddleware(thunk),
+	window.devToolsExtension?window.devToolsExtension():f=>f
+))
+```
+
+------
+
