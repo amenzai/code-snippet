@@ -10,13 +10,36 @@ setInterval(func,delay) setTimeout(func,delay) requestAnimationFrame(func)
 
 ------
 
+mongodb使用指南：
+
+- 下载：https://www.mongodb.com/download-center#community
+- 安装完以后，找到安装目录，比如D:\mongodb\bin(可以将其配置到环境变量)
+- 配置文件形式启动
+	- mongo.conf:
+	dbpath=c:\MongoDB\database logpath=c:\MongoDB\logs\mongodb.log journal=true logappend=true port=27017
+	- 启动并安装服务：mongod --config c:\MongoDB\etc\mongo.conf --install --serviceName "MongoDB"
+	- 移除服务：mongod --config c:\MongoDB\etc\mongo.conf --remove
+	- net start MongoDB 服务已经安装好，可以这样启动 
+- 命令形式启动
+	- mongod --dbpath c:\MongoDB\data --logpath c:\MongoDB\log\mongo.log --journal
+
+------
+
 node express mongodb 开发web后台接口
+
+node调试：pm2 start demo.js
+
+前后端联调：
+- npm start 开启前端
+- nodemon server.js 开启后端
+- package.josn 配置 proxy属性，跨域处理
+
 ```bash
 # 安装express
 npm install express --save
 
 # node应用自动刷新
-npm install -g nodemon node
+npm install -g nodemon
 
 nodemon demo.js
 
@@ -25,9 +48,20 @@ nodemon demo.js
 
 # 执行启动mongodb
 mongod --config /user/local/etc/mongod.conf
+
+# 认证方式启动
+mongod -f /mongodb/etc/mongo.conf --auth
+
 mongo
 
-# express 与 mongodb结合 用 mongoose
+show dbs
+
+# 给数据库添加管理员账号密码
+use admin
+db.createUser({user:"admin",pwd:"123456",roles:["root"]})
+db.auth("admin", "123456")
+
+# express 与 mongodb结合 用 mongoosel
 npm install mongoose --save
 ```
 

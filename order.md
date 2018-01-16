@@ -53,8 +53,12 @@ $ git pull origin master
 $ git status -s # 输出简要的变更日志
 $ git diff # 对比工作区和版本库（文件在暂存区则与暂存区对比）的变化
 git diff --staged # 比较暂存区和版本库差异
+
 $ git log # 可以查看提交日志
+$ git reflog # 提交日志简短
 $ git reset --hard xxxxxx # 回归到指定版本
+git reset --hard HEAD^ # 回退到上一个版本
+git push -f # 强制覆盖远程版本
 $ git branch # 查看仓库有哪些分支以及当前处于哪个分支
 $ git branch V2 # 创建一个V2分支
 $ git checkout V2 # 切换到V2分支
