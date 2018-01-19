@@ -65,6 +65,40 @@ function handleThings(opts = {}) {
 }
 ```
 
+### Map结构
+
+```js
+const arr = [['tom',1],['jack',2]]
+let map = new Map(arr);
+
+for (let key of map.keys()) {
+  console.log(key);
+  // tom
+  // jack
+}
+
+for (let value of map.values()) {
+  console.log(value);
+  // 1
+  // 2
+}
+
+for (let item of map.entries()) {
+  console.log(item[0], item[1]);
+  // tom 1
+  // jack 2
+}
+```
+
+### Set结构
+
+```js
+const array = [1,2,3,4,2,4,1]
+// 去除数组的重复成员
+[...new Set(array)] // [1,2,3,4]
+```
+
+
 ### 总是用Class，取代需要prototype的操作。因为Class的写法更简洁，更易于理解。
 ```js 
 // bad
@@ -108,6 +142,59 @@ class PeekableQueue extends Queue {
 }
 ```
 
+### Promise
+
+```js
+
+// 异步加载图片
+function loadImageAsync(url) {
+  return new Promise(function(resolve, reject) {
+    const image = new Image();
+
+    image.onload = function() {
+      resolve(image);
+    };
+
+    image.onerror = function() {
+      reject(new Error('Could not load image at ' + url));
+    };
+
+    image.src = url;
+  });
+}
+
+// ajax promise封装
+const getJSON = function(url) {
+  const promise = new Promise(function(resolve, reject){
+    const handler = function() {
+      if (this.readyState !== 4) {
+        return;
+      }
+      if (this.status === 200) {
+        resolve(this.response);
+      } else {
+        reject(new Error(this.statusText));
+      }
+    };
+    const client = new XMLHttpRequest();
+    client.open("GET", url);
+    client.onreadystatechange = handler;
+    client.responseType = "json";
+    client.setRequestHeader("Accept", "application/json");
+    client.send();
+
+  });
+
+  return promise;
+};
+
+getJSON("/posts.json").then(function(json) {
+  console.log('Contents: ' + json);
+}, function(error) {
+  console.error('出错了', error);
+});
+```
+
 ### 模块导入、导出语法使用ES6语法
 ```js 
 import .... from ...
@@ -128,6 +215,12 @@ $ npm i -g eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react
 {
   "extends": "eslint-config-airbnb"
 }
+```
+
+检验文件
+
+```bash
+eslint index.js
 ```
 
 
