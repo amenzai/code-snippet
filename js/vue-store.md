@@ -46,7 +46,91 @@ this.$store.commit('UPDATE_LOADING', true);
 this.$store.state.isLoading;
 ```
 
+组件中使用：
+
+```js
+// 在单独构建的版本中辅助函数为 Vuex.mapState
+import { mapState } from 'vuex'
+
+export default {
+  // ...
+  computed: mapState({
+    // 箭头函数可使代码更简练
+    count: state => state.count,
+
+    // 传字符串参数 'count' 等同于 `state => state.count`
+    countAlias: 'count',
+
+    // 为了能够使用 `this` 获取局部状态，必须使用常规函数
+    countPlusLocalState (state) {
+      return state.count + this.localCount
+    }
+  })
+}
+// or
+computed: mapState([
+  // 映射 this.count 为 store.state.count
+  'count'
+])
+```
+
 ## 杂谈
+
+### getter
+getter的值依赖state，是个计算属性
+相当于 vue中的 data 和 computer
+
+例子：
+```js
+const store = new Vuex.Store({
+  state: {
+    todos: [
+      { id: 1, text: '...', done: true },
+      { id: 2, text: '...', done: false }
+    ]
+  },
+  getters: {
+    doneTodos: state => {
+      return state.todos.filter(todo => todo.done)
+    }
+  }
+})
+
+// 获取
+store.getters.doneTodos // -> [{ id: 1, text: '...', done: true }]
+```
+
+组件中使用：
+
+```js
+computed: {
+  doneTodosCount () {
+    return this.$store.getters.doneTodosCount
+  }
+}
+
+// or
+import { mapGetters } from 'vuex'
+
+export default {
+  // ...
+  computed: {
+  // 使用对象展开运算符将 getter 混入 computed 对象中
+    ...mapGetters([
+      'doneTodosCount',
+      'anotherGetter',
+      // ...
+    ])
+  }
+}
+
+// or
+
+mapGetters({
+  // 映射 `this.doneCount` 为 `store.getters.doneTodosCount`
+  doneCount: 'doneTodosCount'
+})
+```
 
 ### mutation
 
@@ -121,7 +205,95 @@ const store = new Vuex.Store({
 })
 ```
 
+组件中使用：
+
+```js
+import { mapMutations } from 'vuex'
+
+export default {
+  // ...
+  methods: {
+    ...mapMutations([
+      'increment', // 将 `this.increment()` 映射为 `this.$store.commit('increment')`
+
+      // `mapMutations` 也支持载荷：
+      'incrementBy' // 将 `this.incrementBy(amount)` 映射为 `this.$store.commit('incrementBy', amount)`
+    ]),
+    ...mapMutations({
+      add: 'increment' // 将 `this.add()` 映射为 `this.$store.commit('increment')`
+    })
+  }
+}
+```
+
 ### action
 
 - Action 提交的是 mutation，而不是直接变更状态。
 - Action 可以包含任意异步操作。
+
+```js
+actions: {
+  incrementAsync ({ commit }) {
+    setTimeout(() => {
+      commit('increment')
+    }, 1000)
+  }
+}
+```
+Action 通过 store.dispatch 方法触发：
+```js
+store.dispatch('incrementAsync')
+
+// 以载荷形式分发
+store.dispatch('incrementAsync', {
+  amount: 10
+})
+
+// 以对象形式分发
+store.dispatch({
+  type: 'incrementAsync',
+  amount: 10
+})
+```
+
+组件中使用：
+```js
+import { mapActions } from 'vuex'
+
+export default {
+  // ...
+  methods: {
+    ...mapActions([
+      'increment', // 将 `this.increment()` 映射为 `this.$store.dispatch('increment')`
+
+      // `mapActions` 也支持载荷：
+      'incrementBy' // 将 `this.incrementBy(amount)` 映射为 `this.$store.dispatch('incrementBy', amount)`
+    ]),
+    ...mapActions({
+      add: 'increment' // 将 `this.add()` 映射为 `this.$store.dispatch('increment')`
+    })
+  }
+}
+```
+
+异步使用：
+
+```js
+actions: {
+  actionA ({ commit }) {
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        commit('someMutation')
+        resolve()
+      }, 1000)
+    })
+  }
+}
+```
+
+使用
+```js
+store.dispatch('actionA').then(() => {
+  // ...
+})
+```
