@@ -180,7 +180,7 @@ import { login,getUserData } from './demo.redux' // 引入action creater
 
 import {Redirect} from 'react-router-dom' // 路由组件
 
-import axios from 'axios
+import axios from 'axios'
 
 // 状态管理 state映射到props
 @connect(
