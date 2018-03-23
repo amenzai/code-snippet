@@ -70,6 +70,7 @@ $ git reset --hard xxxxxx # 回归到指定版本
 git reset --hard HEAD^ # 回退到上一个版本
 git push -f # 强制覆盖远程版本
 $ git branch # 查看仓库有哪些分支以及当前处于哪个分支
+$ git branch --remote # 查看仓库有哪些远程分支
 $ git branch V2 # 创建一个V2分支
 $ git checkout V2 # 切换到V2分支
 git checkout -b dev # 创建后切换
@@ -77,15 +78,16 @@ $ git push -u origin V2 # 提交到V2分支
 git reset <file> # 从暂存区恢复到工作文件
 git reset -- . # 从暂存区恢复到工作文件
 git checkout -- readme.txt # 撤销工作区对应文件修改
-git co . # 抛弃工作区修改
+git checkout . # 抛弃工作区修改
 # git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
 git push origin <local_branch>:<remote_branch> # 创建远程分支
 git merge dev # 合并指定分支到当前分支
 git merge --no-ff -m "merge with no-ff" dev
 git branch -d dev # 删除分支
-git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
+git branch -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
 git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
+git push origin --delete branch_name   #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
 git log --graph #查看分支合并图
 git stash # 暂存
 git stash list # 列所有stash
