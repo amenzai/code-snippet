@@ -15,6 +15,7 @@ browser-sync start --server --files "**/*"  #cmd要记得用双引号
 ## Bower常用命令
 
 ```bash
+$ bower help
 $ bower init  # 初始化一个Bower的配置文件(bower.json)
 $ bower install  # 安装bower.json里的所有依赖
 $ bower install bootstrap#1.4.5  # 安装一个包（指定版本）
@@ -25,6 +26,15 @@ $ bower install bootstrap --save  # 安装一个包并将其添加到配置文�
 $ bower uninstall bootstrap # 卸载一个包
 $ bower update bootstrap # 更新一个包
 $ bower update # 更新所有的包
+
+# .bowerrc 
+{
+  "directory" : "components",
+  "json"      : "bower.json",
+  "endpoint"  : "https://Bower.herokuapp.com",
+  "searchpath"  : "",
+  "shorthand_resolver" : ""
+}
 ```
 
 ## Git常用命令
@@ -60,6 +70,7 @@ $ git reset --hard xxxxxx # 回归到指定版本
 git reset --hard HEAD^ # 回退到上一个版本
 git push -f # 强制覆盖远程版本
 $ git branch # 查看仓库有哪些分支以及当前处于哪个分支
+$ git branch --remote # 查看仓库有哪些远程分支
 $ git branch V2 # 创建一个V2分支
 $ git checkout V2 # 切换到V2分支
 git checkout -b dev # 创建后切换
@@ -67,15 +78,16 @@ $ git push -u origin V2 # 提交到V2分支
 git reset <file> # 从暂存区恢复到工作文件
 git reset -- . # 从暂存区恢复到工作文件
 git checkout -- readme.txt # 撤销工作区对应文件修改
-git co . # 抛弃工作区修改
+git checkout . # 抛弃工作区修改
 # git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
 git push origin <local_branch>:<remote_branch> # 创建远程分支
 git merge dev # 合并指定分支到当前分支
 git merge --no-ff -m "merge with no-ff" dev
 git branch -d dev # 删除分支
-git br -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
+git branch -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
 git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
+git push origin --delete branch_name   #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
 git log --graph #查看分支合并图
 git stash # 暂存
 git stash list # 列所有stash
@@ -96,8 +108,8 @@ nvm list # 查看本地已经安装版本
 nvm ls-remote # 查看服务器上所有可供安装的版本
 
 npm config ls # 列出prefix配置
-npm config set cache “C:\dev\nvm\npm-cache” # 设置全局缓存文件夹
-npm config set prefix “C:\dev\nvm\npm” # 设置全局模块文件夹
+npm config set cache "C:\dev\nvm\npm-cache" # 设置全局缓存文件夹
+npm config set prefix "C:\dev\nvm\npm" # 设置全局模块文件夹
 npm install # 安装package.json中的包以及依赖包
 npm init # 初始化操作，给项目添加一个配置文件(package.json)
 npm install xxx@0.1.1 # 安装一个包，默认安装最新稳定版本
@@ -123,6 +135,50 @@ node index.js
 node path/index.js
 node path/index
 node --help # 查看帮助
+```
+```js
+
+// 在npmjs.com注册用户
+npm adduser
+
+// 发布
+npm publish
+
+// 如果你的模块是用ES6写的，那么发布的时候，最好转成ES5。首先，需要安装Babel。
+$ npm install --save-dev babel-cli@6 babel-preset-es2015@6
+
+// 然后，在package.json里面写入build脚本。
+"scripts": {
+  "build": "babel source --presets babel-preset-es2015 --out-dir distribution",
+  "prepublish": "npm run build"
+}
+
+// 运行上面的脚本，会将source目录里面的ES6源码文件，转为distribution目录里面的ES5源码文件。然后，在项目根目录下面创建两个文件.npmignore和.gitignore，分别写入以下内容。
+
+// .npmignore
+source
+
+// .gitignore
+node_modules
+distribution
+```
+
+## yarn
+
+```bash
+yarn init
+
+yarn add [package]@[version]
+
+yarn upgrade [package]
+
+yarn remove [package]
+
+yarn add [package]@[version] --dev
+
+yarn add package-1@1.2.3
+yarn add package-2@^1.0.0
+yarn add package-3@beta 
 ```
 
 ## hexo命令
