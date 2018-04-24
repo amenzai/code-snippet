@@ -28,37 +28,110 @@ init 3 # 切换命令行界面
 ```
 
 ## 常用命令
-# deploy yuntask admin-static 
+```bash
+# login
+ssh name@server # 回车会让你输入用户名、密码
+
+#下载包
+wget https://npm.taobao.org/mirrors/node/v8.9.3/node-v8.9.3-linux-x64.tar.xz
+
+# 解压
+xz -d node-v8.9.3-linux-x64.tar.xz
+tar -xzvf node-v8.9.3-linux-x64.tar.gz
+tar -xvf node-v8.9.3-linux-x64.tar
+# 压缩
+tar -zcvf static.tar.gz ./*
+
+tar -cvf jpg.tar *.jpg  # 将目录里所有jpg文件打包成tar.jpg 
+
+tar -czf jpg.tar.gz *.jpg  # 将目录里所有jpg文件打包成jpg.tar后，并且将其用gzip压缩，生成一个gzip压缩过的包，命名为jpg.tar.gz
+
+# 建立软连接
+ln -s /node-v8.9.3-linux-x64/bin/node /usr/local/bin/node
+ln -s /node-v8.9.3-linux-x64/bin/npm /usr/local/bin/npm
+
+# linux查看详细目录
+ls -la
+
+# 不推荐
+# sudo apt-get install nodejs
+# sudo apt-get install npm
+
+# 创建目录
+mkdir content
+ls
+ll
+cd content 
+pwd
+cd ..
+rm -rf content
+cp a.js a1.js
+mv a1.js src/a1.js
+rm a.js
+
+# vi编辑器
+vi a.js
+i
+esc
+esc:w 
+esc:q
+wsc:wq
+
+# 查看文件内容
+cat a.js
+
+# 查看前一些
+head a.js
+head -n 1 a.js
+# 查看后面一些
+tail a.js
+tail -n 2 a.js
+
+# 搜索操作
+grep '2' a.js
+```
+
+## 项目上线脚本封装
+```bash
+# deploy test-project 
 
 # get the last version code
-cd /root/admin-static
-git checkout develop
+cd /root/test-project 
+git checkout master
 git pull
 rm -rf /root/admin-static/src/appconfig.js
 cp -r /deplopy/admin-static/doc/appconfig.js /root/admin-static/src/
 
+cnpm install
 cnpm run build
 cp -rf /data/www/static/admin /data/www/static/admin_bak
 rm -rf /data/www/static/admin/*
-cp -rf dist/* /data/www/static/admin/ 
-cp -rf /data/www/static/admin/ueditor /data/www/static/
+cp -rf dist/* /data/www/static/admin
+```
 
+```bash
+nowdate=`date '+%Y%m%d'`
+cd /root/admin-static/weifactory-web
+#git checkout master
+git pull
 
+cnpm install
 
-date 显示系统日期 
-cal 2007 显示2007年的日历表 
+cnpm run build
+#旧项目归档备份
+cd /www/www_weifactory_vastsum_net
+#压缩旧项目
+tar -zcvf static.${nowdate}.bak ./*
+#移动旧项目到备份路径
+mv static.${nowdate}.bak /root/file/webfile/static_bak
 
-shutdown -h now 关闭系统(1) 
-init 0 关闭系统(2) 
-telinit 0 关闭系统(3) 
-shutdown -h hours:minutes & 按预定时间关闭系统 
-shutdown -c 取消按预定时间关闭系统 
-shutdown -r now 重启(1) 
-reboot 重启(2) 
-logout 注销
+#回到资源路径
+cd /root/admin-static/weifactory-web
 
+cp -rf dist/* /www/www_weifactory_vastsum_net
+```
 
-
+## 参考链接
 http://www.cnblogs.com/laov/p/3541414.html#Linux
 http://www.cnblogs.com/fnlingnzb-learner/p/5831284.html
 
