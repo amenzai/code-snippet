@@ -560,4 +560,33 @@ $("#button").one( "click", function() { return false; } );
 })(jQuery);
 $("a").greenify().addClass("greenified");
 ```
+其他方法参考：
 
+```js
+  $.fn.extend({
+    check: function () {       // 扩展一个check方法，该方法是将所有的多选按钮全部选中
+      this.each(function () {
+        this.checked = true;
+      });
+    },
+    inputText: function () {   // 自定义一个inputText方法，该方法的功能是将文本框自动赋值
+      this.each(function () {
+        this.value = "auto input value";
+      });
+    }
+  });
+  //注：如果是加上标签内的属性则需要写在[]内 具体使用如下所示
+  // $("input[type=checkbox]").check();  //将type等于checkbox的多选框全部选中
+  // $("input[name=num]").check();         //将name等于num的多选框全部选中
+  $("input[type=text]").inputText();    //将type等于text的所有文本框自动赋值
+  $.extend({
+    plus: function (a, b) { return a + b; },
+    multi: function (a, b) { return a * b },
+    max: function (a, b) { return a > b ? a : b; },
+    min: function (a, b) { return a > b ? b : a; }
+  });
+  // alert($.plus(2, 3));        //结果5
+  // alert($.multi(2, 3));   //结果6
+  // alert($.max(2, 3));     //结果3
+  // alert($.min(2, 3));     //结果2
+  ```
