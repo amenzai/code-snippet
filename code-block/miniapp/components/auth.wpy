@@ -1,0 +1,22 @@
+<style lang="less">
+
+</style>
+<template>
+  <view>
+
+  </view>
+</template>
+<script>
+import wepy from 'wepy'
+
+export default class List extends wepy.component {
+  props = {}
+  data = {}
+
+  events = {}
+
+  methods = {}
+
+  onLoad() {}
+}
+</script>

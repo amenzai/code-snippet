@@ -1,0 +1,167 @@
+<style lang="less">
+@import './style/reset.less';
+</style>
+
+<script>
+import wepy from 'wepy'
+import 'wepy-async-function'
+import { login } from 'api/api.js'
+// import Promise from 'promise-polyfill';
+
+export default class extends wepy.app {
+  config = {
+    pages: [
+      'pages/index'
+    ],
+    window: {
+      // enablePullDownRefresh: true,
+      backgroundTextStyle: 'light',
+      navigationBarTextStyle: 'white',
+      navigationBarTitleText: '默契有没有',
+      navigationBarBackgroundColor: '#dd4b4b',
+      backgroundColor: '#dd4b4b'
+    },
+    debug: true,
+    networkTimeout: {
+      // 相关请求超时时间
+      request: 10000,
+      connectSocket: 10000,
+      uploadFile: 10000,
+      downloadFile: 10000
+    },
+    tabBar: {
+      color: '#888', // 文字
+      selectedColor: '#ffcc66', // 选中文字
+      backgroundColor: '#fff',
+      borderStyle: 'white', // 上边框颜色 white black
+      position: 'bottom', // 'top',   default: 'bottom'
+      list: [
+        {
+          pagePath: 'pages/index', // 点击跳转的页面路径
+          text: '出题',
+          iconPath: 'images/icon1.png',
+          selectedIconPath: 'images/icon1_active.png'
+        },
+        {
+          pagePath: 'pages/record/record', // 点击跳转的页面路径
+          text: '记录',
+          iconPath: 'images/icon2.png',
+          selectedIconPath: 'images/icon2_active.png'
+        },
+        {
+          pagePath: 'pages/withdrawal/withdrawal', // 点击跳转的页面路径
+          text: '提现',
+          iconPath: 'images/icon3.png',
+          selectedIconPath: 'images/icon3_active.png'
+        }
+      ]
+    }
+  }
+
+  globalData = {
+    userInfo: null
+    // isAuth: ''
+  }
+
+  constructor() {
+    super()
+    this.use('requestfix')
+    this.use('promisify')
+    this.intercept('request', {
+      // 发出请求时的回调函数
+      config(p) {
+        wepy.showLoading({
+          title: '加载中'
+        })
+        p.data.key = wepy.getStorageSync('_jezoeMiniapp_') || ''
+        return p
+      },
+      success(p) {
+        wepy.hideLoading()
+        const data = p.data
+        console.log('success quest', p)
+        if (p.statusCode === 502) {
+          wepy.showToast({
+            title: '服务器正在升级',
+            icon: 'none'
+          })
+        } else if (data.code === 500) {
+          wepy.showToast({
+            title: data.message,
+            icon: 'none'
+          })
+        } else if (data.code === 600) {
+          wepy
+            .showModal({
+              title: '提示',
+              content: data.message,
+              showCancel: false, // 是否显示取消按钮
+              confirmText: '重新登陆',
+              confirmColor: '#3CC51F'
+            })
+            .then(res => {
+              if (res.confirm) {
+                wepy.login().then(logRes => {
+                  if (logRes.code) {
+                    wepy.getUserInfo().then(userData => {
+                      const param = {
+                        code: logRes.code,
+                        signature: userData.signature,
+                        rawData: userData.rawData,
+                        encryptedData: userData.encryptedData,
+                        iv: userData.iv
+                      }
+                      login('POST', param).then(res => {
+                        if (res.success) {
+                          wepy.setStorageSync('_jezoeMiniapp_', res.data)
+                          wepy.startPullDownRefresh()
+                        }
+                      })
+                    })
+                  }
+                })
+              }
+            })
+        }
+
+        return p
+      },
+      fail(p) {
+        wepy.hideLoading()
+        wepy.showToast({
+          title: '接口异常',
+          icon: 'none'
+        })
+        console.log('fail quest')
+
+        return p
+      },
+      complete(p) {}
+    })
+  }
+
+  onLaunch() {}
+
+  getUserInfo(cb) {
+    // if (this.globalData.userInfo) {
+    //   return this.globalData.userInfo
+    // }
+    wepy
+      .getUserInfo()
+      .then(res => {
+        console.log('userInfo', res)
+        this.globalData.userInfo = res.userInfo
+        // this.globalData.isAuth = true
+        cb && cb(res)
+      })
+      // .catch(res => {
+      //   wepy.showToast({
+      //     title: '登录失败',
+      //     icon: 'none'
+      //   })
+      //   this.globalData.isAuth = false
+      //   cb && cb(false)
+      // })
+  }
+}
+</script>

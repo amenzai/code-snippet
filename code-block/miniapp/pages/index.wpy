@@ -1,0 +1,118 @@
+<style lang="less">
+@import './../style/fn.less';
+page {
+  background-color: @main-color;
+  background-image: url('https://www.yuntask.com/upload/miniapp/miniapp_money_images/bg.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center bottom;
+}
+.page {
+  .title {
+    width: 706rpx;
+    height: 260rpx;
+    margin-bottom: 160rpx;
+  }
+  .userinfo-avatar {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    border: 2rpx solid #fff;
+  }
+  .userinfo-nickname {
+    margin-top: 20rpx;
+    margin-bottom: 100rpx;
+    color: @text-color-white;
+  }
+  .btn {
+    .globalBtn(#fff, @main-color);
+    margin-bottom: 20rpx;
+  }
+
+  .meta {
+    color: @text-color-white;
+    font-size: 14px;
+    .gutter {
+      padding-left: 40rpx;
+      padding-right: 40rpx;
+    }
+    .service {
+      display: inline-block;
+      background-color: transparent;
+      padding: 0;
+      font-size: 14px;
+      line-height: 1.6;
+      color: @text-color-white;
+      vertical-align: middle;
+      &:after {
+        border: none;
+      }
+    }
+  }
+}
+</style>
+<template>
+  <view>
+    
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+import { login } from 'api/api.js'
+
+export default class Index extends wepy.page {
+  config = {}
+
+  data = {
+    userInfo: {
+      nickName: ''
+    },
+    isShow: false
+  }
+
+  methods = {
+    jumpDraw() {
+      this.$navigate('./draw/draw')
+    }
+  }
+
+  onLoad() {}
+
+  onShow() {
+    const key = wepy.getStorageSync('_jezoeMiniapp_')
+    wepy.login().then(res => {
+      console.log('loginInfo', res)
+      if (res.code) {
+        // wepy.getSetting().then(rp => {
+        //   if (!rp.authSetting['scope.userInfo']) {
+        //     this.$redirect('./getauth')
+        //   } else {
+        this.$parent.getUserInfo(cbData => {
+          if (cbData.userInfo) {
+            this.userInfo = cbData.userInfo
+            this.isShow = true
+          }
+          if (!key) {
+            const param = {
+              code: res.code,
+              signature: cbData.signature,
+              rawData: cbData.rawData,
+              encryptedData: cbData.encryptedData,
+              iv: cbData.iv
+            }
+            login('POST', param).then(res => {
+              if (res.success) {
+                wepy.setStorageSync('_jezoeMiniapp_', res.data)
+              }
+            })
+          }
+          this.$apply()
+        })
+        // }
+        // })
+      }
+    })
+  }
+}
+</script>
