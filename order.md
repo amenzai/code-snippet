@@ -1,5 +1,54 @@
 常用命令汇总
 
+## 常用项目初始化
+
+### Vue
+
+1. 装node(npm包含其中)
+使用`node -v` `npm -v` 验证是否安装成功
+2. 全局安装vue-cli
+`npm install -g vue-cli`
+嫌慢的话，安装cnpm`npm install -g cnpm --registry=https://registry.npm.taobao.org`
+`cnpm install -g vue-cli`
+3. 初始化项目
+`vue init webpack vue-demo`
+`cd vue-demo`
+`npm install or cnpm install`
+4. 启动项目
+`npm run dev`
+
+
+### react
+
+```bash
+$ npm install -g cnpm --registry=https://registry.npm.taobao.org
+$ npm config set registry https://registry.npm.taobao.org
+
+$ cnpm install -g create-react-app
+$ create-react-app my-app
+$ cd my-app/
+$ npm start
+```
+
+### wepy
+
+```bash
+# 安装工具
+npm install wepy-cli -g
+
+# 查看项目模板
+wepy list
+
+# 初始化项目
+wepy init standard myproject
+
+cd myproject
+npm  install
+
+# 实时监控修改并编译
+wepy build --watch
+```
+
 ## 开启服务
 
 ### http-server
