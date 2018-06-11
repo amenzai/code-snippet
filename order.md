@@ -57,7 +57,7 @@ $ git add --all # 添加所有未托管的文件（忽略.gitignore清单中的�
 $ git commit -m 'Initial commit(change log)' # 提交到本地版本库
 $ git remote add origin https://github.com/amenzai/demo-project.git # 添加一个远端地址并起了一个别名叫origin
 $ git remote -v # 查看现有的远端列表
-$ git push -u origin master
+$ git push -u origin master # 第一次提交
 $ git pull origin master
 
 $ git status -s # 输出简要的变更日志
@@ -86,15 +86,17 @@ git merge dev # 合并指定分支到当前分支
 git merge --no-ff -m "merge with no-ff" dev
 git branch -d dev # 删除分支
 git branch -D <branch> # 强制删除某个分支 (未被合并的分支被删除的时候需要强制)
-git push origin :<remote_branch> #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
 git push origin --delete branch_name   #先删除本地分支(git br -d <branch>)，然后再push删除远程分支
 git log --graph #查看分支合并图
 git stash # 暂存
 git stash list # 列所有stash
 git stash apply # 恢复暂存的内容
 git stash drop # 删除暂存区
-git checkout -b branch-name origin/branch-name # 在本地创建和远程分支对应的分支
-git branch --set-upstream branch-name origin/branch-name # 建立本地分支和远程分支的关联
+git checkout -b branch-name [remote-branch] # 在本地创建和远程分支对应的分支
+git branch --track [branch] [remote-branch] # 新建一个分支，与指定的远程分支建立追踪关系
+git branch --set-upstream branch-name [remote-branch] # 建立追踪关系，在现有分支与指定的远程分支之间
+
+$ git archive # 生成一个可供发布的压缩包
 ```
 
 ## Node NPM常用命令
