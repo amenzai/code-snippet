@@ -10,6 +10,9 @@ $ cnpm install -g create-react-app
 $ create-react-app my-app
 $ cd my-app/
 $ npm start
+
+# 弹出配置文件
+$ npm run eject 
 ```
 
 ## HTML模板

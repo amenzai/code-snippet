@@ -1,3 +1,5 @@
+## 数据结构
+```js
 // 栈
 // 书，盘子
 function Stack() {
@@ -221,3 +223,4 @@ this.insert = function (position, element) {
     return false; //{6}
   }
 };
+```
