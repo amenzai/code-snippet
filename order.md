@@ -55,6 +55,113 @@ npm run dev (wepy build --watch)
 npm run build
 ```
 
+## mongodb使用指南
+
+- [下载](https://www.mongodb.com/download-center#community)
+- 安装完以后，找到安装目录，比如 `D:\mongodb\bin` (可以将其配置到环境变量)
+- 配置文件形式启动
+	- mongo.conf:
+	`dbpath=c:\MongoDB\database logpath=c:\MongoDB\logs\mongodb.log journal=true logappend=true port=27017`
+	- 启动并安装服务：`mongod --config c:\MongoDB\etc\mongo.conf --install --serviceName "MongoDB"`
+	- 移除服务：`mongod --config c:\MongoDB\etc\mongo.conf --remove`
+	- `net start MongoDB` (服务已经安装好，可以这样启动) 
+- 命令形式启动
+	- `mongod --dbpath c:\MongoDB\data --logpath c:\MongoDB\log\mongo.log --journal`
+
+node express mongodb 开发web后台接口
+
+node调试：pm2 start server.js
+
+前后端联调：
+- npm start 开启前端
+- nodemon server.js 开启后端
+- package.josn 配置 proxy属性，跨域处理
+
+```bash
+# 安装express
+npm install express --save
+
+# node应用自动刷新
+npm install -g nodemon
+
+nodemon demo.js
+
+# mongodb使用
+# 下载：mongodb.com
+
+# 执行启动mongodb
+mongod --config /user/local/etc/mongod.conf
+
+# 认证方式启动
+mongod -f /mongodb/etc/mongo.conf --auth
+
+mongo
+
+show dbs
+
+# 给数据库添加管理员账号密码
+use admin
+db.createUser({user:"admin",pwd:"123456",roles:["root"]})
+db.auth("admin", "123456")
+
+# express 与 mongodb结合 用 mongoosel
+npm install mongoose --save
+```
+
+```js
+// server.js
+
+const express = require('express')
+const mongoose = require('mongoose')
+// 链接mongo 并且使用imooc这个集合
+const DB_URL = 'mongodb://localhost:27017/imooc'（拷贝mongodb启动后的那个连接地址，imooc是个数据库名）
+mongoose.connect(DB_URL)
+mongoose.connection.on('connected',function(){
+	console.log('mongo connect success')
+})
+// 类似于mysql的表 mongo里有文档、字段的概念，
+const User = mongoose.model('user', new mongoose.Schema({
+	user:{type:String,require:true},
+	age:{type:Number,require:true}
+}))
+// 新增数据
+// User.create({
+// 	user:'xiaohua',
+// 	age:12
+// },function(err, doc){
+// 	if (!err) {
+// 		console.log(doc)
+// 	}else{
+// 		console.log(err)
+// 	}
+// })
+// 新建app
+// 删
+// User.remove({age:18},function(err,doc){
+// 	console.log(doc)
+// })
+// 改
+// User.update({'user':'xiaoming'},{'$set':{age:26}},function(err,doc){
+// 	console.log(doc)
+// })
+const app = express()
+app.get('/',function(req,res){
+	res.send('<h1>Hello world</h1>')
+})	
+app.get('/data',function(req,res){
+  // 查询数据
+	User.findOne({user:'xiaoming'},function(err,doc){
+		res.json(doc)
+	})
+})
+// app.get('/delete',function(){
+
+// })
+app.listen(9093,function(){
+	console.log('Node app start at port 9093')
+})
+```
+
 ## 开启服务
 
 ### http-server
@@ -230,6 +337,10 @@ git stash drop
 
 # 生成一个可供发布的压缩包
 $ git archive 
+
+# 发布一个版本
+git tag -a 'v0.0.1' -m 'first commit' 
+git push origin v0.0.1
 ```
 
 ## Node NPM常用命令
