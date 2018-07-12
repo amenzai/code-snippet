@@ -5,19 +5,34 @@
 ### Vue
 
 1. 装node(npm包含其中)
-使用`node -v` `npm -v` 验证是否安装成功
+```bash
+node -v
+npm -v
+```
 2. 全局安装vue-cli
-`npm install -g vue-cli`
-嫌慢的话，安装cnpm 
-`npm install -g cnpm --registry=https://registry.npm.taobao.org`
-`cnpm install -g vue-cli`
-3. 初始化项目
-`vue init webpack vue-demo`
-`cd vue-demo`
-`npm install or cnpm install`
-4. 启动项目
-`npm run dev`
+```bash
+npm install -g vue-cli
 
+# 嫌慢的话，安装cnpm 
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+cnpm install -g vue-cli
+```
+3. 初始化项目
+```bash
+# vue模板
+vue init webpack vue-demo
+cd vue-demo
+
+# mpvue模板
+vue init mpvue/mpvue-quickstart mpvue-demo
+cd mpvue-demo
+
+npm install or cnpm install
+```
+4. 启动项目
+```bash
+npm run dev
+```
 ### react
 
 ```bash
