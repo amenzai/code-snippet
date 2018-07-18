@@ -8,6 +8,7 @@
   - [jqueryAPI](./js/jquery.md)
   - [cookie封装](./js/cookie.md)
   - [ES6简单整理](./js/ES6.md)
+  - [ES6详细](./js/ES2015.md)
   - [base64编码封装](./js/base64.md)
   - [日期格式化模块封装](./js/dateFormat.md)
   - [数值格式化模块封装](./js/numberFormat.md)

@@ -13,7 +13,7 @@
 presets字段设定转码规则，官方提供以下的规则集，你可以根据需要安装。
 ```bash
 # ES2015转码规则
-$ npm install --save-dev babel-preset-es2015
+$ npm install --save-dev babel-preset-latest
 
 # react转码规则
 $ npm install --save-dev babel-preset-react
@@ -28,7 +28,7 @@ $ npm install --save-dev babel-preset-stage-3
 ```js
 {
   "presets": [
-    "es2015",
+    "latest",
     "react",
     "stage-2"
   ],
@@ -60,6 +60,45 @@ $ babel src -d lib
 $ babel src -d lib -s
 ```
 
+上面代码是在全局环境下，进行 Babel 转码。这意味着，如果项目要运行，全局环境必须有 Babel，也就是说项目产生了对环境的依赖。另一方面，这样做也无法支持不同项目使用不同版本的 Babel。
+
+```bash
+# 安装
+$ npm install --save-dev babel-cli
+```
+
+然后，改写package.json。
+
+```json
+{
+  // ...
+  "devDependencies": {
+    "babel-cli": "^6.0.0"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+}
+```
+
+转码
+
+```bash
+$ npm run build
+```
+
+## babel-node
+
+babel-cli工具自带一个babel-node命令，提供一个支持 ES6 的 REPL 环境。它支持 Node 的 REPL 环境的所有功能，而且可以直接运行 ES6 代码。
+
+它不用单独安装，而是随babel-cli一起安装。然后，执行babel-node就进入 REPL 环境。
+
+babel-node命令可以直接运行 ES6 脚本。将上面的代码放入脚本文件es6.js，然后直接运行。
+
+```bash
+$ babel-node es6.js
+```
+
 ## babel-polyfill
 
 Babel默认只转换新的JavaScript句法（syntax），而不转换新的API，比如Iterator、Generator、Set、Maps、Proxy、Reflect、Symbol、Promise等全局对象，以及一些定义在全局对象上的方法（比如Object.assign）都不会转码。
@@ -77,3 +116,45 @@ import 'babel-polyfill';
 // 或者
 require('babel-polyfill');
 ```
+
+## 与其他工具的配合
+
+许多工具需要 Babel 进行前置转码，这里举两个例子：ESLint 和 Mocha。
+
+ESLint 用于静态检查代码的语法和风格，安装命令如下。
+
+```bash
+$ npm install --save-dev eslint babel-eslint
+```
+然后，在项目根目录下，新建一个配置文件.eslintrc，在其中加入parser字段。
+```json
+{
+  "parser": "babel-eslint",
+  "rules": {
+    ...
+  }
+}
+```
+再在package.json之中，加入相应的scripts脚本。
+```json
+{
+  "name": "my-module",
+  "scripts": {
+    "lint": "eslint my-files.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "...",
+    "eslint": "..."
+  }
+}
+```
+
+Mocha 则是一个测试框架，如果需要执行使用 ES6 语法的测试脚本，可以修改package.json的scripts.test。
+
+```json
+"scripts": {
+  "test": "mocha --ui qunit --compilers js:babel-core/register"
+}
+```
+
+上面命令中，--compilers参数指定脚本的转码器，规定后缀名为js的文件，都需要使用babel-core/register先转码。
