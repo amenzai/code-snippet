@@ -1,11 +1,4 @@
-@import 'fn';
-html {
-  font-family: sans-serif;
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  .setTapColor();
-}
-
+@import 'variable';
 html,
 body,
 h1,
@@ -77,11 +70,7 @@ abbr {
 }
 
 img {
-  border: 0 none;
-  width: auto\9;
-  max-width: 100%;
-  vertical-align: top;
-  height: auto;
+  vertical-align: bottom;
 }
 
 i,
@@ -179,7 +168,6 @@ body {
 
 a {
   color: @txtC;
-  .setTapColor();
 }
 
 a:hover {
@@ -187,6 +175,7 @@ a:hover {
 }
 
 // add
+
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -203,15 +192,12 @@ a:hover {
 ::-webkit-input-placeholder {
   color: #999;
 }
-
 :-moz-placeholder {
   color: #999;
 }
-
 ::-moz-placeholder {
   color: #999;
 }
-
 :-ms-input-placeholder {
   color: #ccc;
 }
