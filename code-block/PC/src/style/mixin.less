@@ -4,16 +4,30 @@
   text-overflow: ellipsis;
   overflow: hidden;
 }
+
 // 多行省略号
 .text-overflow-line(@line) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: @line;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-break: break-all;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
 }
 
-.shadow(){
+/*
+ * 清除浮动
+ */
+
+.mix-clearfix () {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+.shadow() {
   box-shadow: 0px 0px 10px 0px rgba(255, 135, 0, 0.74);
 }
