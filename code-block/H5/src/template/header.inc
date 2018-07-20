@@ -7,7 +7,7 @@
 <meta content="black" name="apple-mobile-web-app-status-bar-style">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>@title</title>
-<link rel="stylesheet" href="/style/common.css">
+<link rel="stylesheet" href="/css/common.css">
 <script>
 	(function (d, w) {
 		const doc = d.documentElement;
