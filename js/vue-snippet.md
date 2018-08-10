@@ -277,3 +277,172 @@ const router = new VueRouter({
 当 URL 为 /foo/bar，$route.matched 将会是一个包含从上到下的所有对象（副本）。
 ```
 - $route.name
+
+## 动画
+vue transiton
+```js
+/*这个定义动画情况，以及存在时的样式，这个样式会覆盖class里的样式*/
+    .mytran-transition {
+        transition: all 0.3s ease;
+        background-color: greenyellow;
+    }
+ 
+    /* .mytran-enter 定义进入的开始状态 */
+    /* .mytran-leave 定义离开的结束状态 */
+    .mytran-enter, .mytran-leave {
+        height: 0;
+        width: 0;
+    }
+
+Vue.transition('mytran', {
+    beforeEnter: function (el) {    //进入之前
+        console.log("进入动画开始时间:" + new Date().getTime());
+    },
+    enter: function (el) {
+        el.textContent = new Date();
+    },
+    afterEnter: function (el) {
+        console.log("进入结束时间:" + new Date().getTime());
+    },
+    beforeLeave: function (el) {
+        console.log("离开动画开始时间:" + new Date().getTime());
+    },
+    leave: function (el) {
+        $(el).text("离开中..." + new Date());
+    },
+    afterLeave: function (el) {
+        console.log("离开结束时间:" + new Date().getTime());
+    }
+})
+```
+## 组件
+
+```js
+var myCom = Vue.extend({
+  template: '<div>这是我的组件</div>'
+})
+
+<template id="myCom">
+  <div>这是template标签构建的组件</div>
+</template>
+
+<script type="text/x-template" id="myCom1">
+  <div>这是script标签构建的组件</div>
+</script>
+
+Vue.component('my-com',myCom)
+
+Vue.component('my-com',{
+  'template':'<div>这是我的组件</div>'
+})
+
+Vue.component('my-com',{
+    template: '#myCom'
+})
+
+var app = new Vue({
+  el: '#app',
+  components: {
+    'my-com': myCom
+  }
+})
+
+var app = new Vue({
+  el: '#app',
+  components: {
+    'my-com': {
+        template: '<div>这是我的组件</div>'
+    }
+  }
+})
+
+var app = new Vue({
+  el: '#app',
+  components: {
+    'my-com': {
+      template: '#myCom'
+    }
+  }
+})
+
+// 异步组件
+Vue.component('async-example', function (resolve, reject) {
+  setTimeout(function () {
+    // 向 `resolve` 回调传递组件定义
+    resolve({
+      template: '<div>I am async!</div>'
+    })
+  }, 1000)
+})
+```
+
+### 组件传值
+bus方式的组件间传值其实就是建立一个公共的js文件，专门用来传递消息
+
+**1. 建立公共文件，并引入**
+
+新建msgBus.js文件。只需两句代码。
+```JS
+import Vue from 'vue'
+export default new Vue;
+```
+**2. 然后在需要传递消息的两个组件引入**
+```JS
+import MsgBus from '@/components/utils/msgBus.js';
+```
+
+**3. 发送消息**
+
+触发组件的事件：
+
+MsgBus.$emit('msg', _this.examineNum);
+
+**4.接受消息**
+
+接受组件的事件：
+
+写在钩子函数内：例如：mounted   created都可以
+```JS
+MsgBus.$on('msg', (e) => {
+  this.examineNum = e;
+})
+```
+
+### 自定义组件demo
+
+```js
+// toast.js
+var Toast = {};
+Toast.install = function (Vue, options) {
+  let opt = {
+      defaultType:'bottom',   // 默认显示位置
+      duration:'2500'         // 持续时间
+  }
+  for(let property in options){
+      opt[property] = options[property];  // 使用 options 的配置
+  }
+  Vue.prototype.$toast = (tips,type) => {
+      if(type){
+          opt.defaultType = type;         // 如果有传type，位置则设为该type
+      }
+      if(document.getElementsByClassName('vue-toast').length){
+          // 如果toast还在，则不再执行
+          return;
+      }
+      let toastTpl = Vue.extend({
+          template: '<div class="vue-toast toast-'+opt.defaultType+'">' + tips + '</div>'
+      });
+      let tpl = new toastTpl().$mount().$el;
+      document.body.appendChild(tpl);
+      setTimeout(function () {
+          document.body.removeChild(tpl);
+      }, opt.duration)
+  }
+  ['bottom', 'center', 'top'].forEach(type => {
+      Vue.prototype.$toast[type] = (tips) => {
+          return Vue.prototype.$toast(tips,type)
+      }
+  })
+}
+module.exports = Toast;
+```

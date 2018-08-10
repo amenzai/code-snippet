@@ -421,6 +421,20 @@ $ npm update -g [package]
 # 卸载
 $ npm uninstall -g [package]
 
+# 更新node版本：
+
+# 先清除npm缓存
+npm cache clean -f
+
+#然后安装n模块
+npm install -g n
+
+# 升级node.js到最新稳定版
+n stable 
+
+# n后面也可以跟随版本号比如
+n v3.7.3
+
 # 进入REPL环境
 node 
 
@@ -442,6 +456,9 @@ node path/index
 
 # 查看帮助
 node --help 
+
+# 判断node项目环境变量：process.env.NODE_ENV === 'production'; 包为cross-env
+# 命令举例："build": "cross-env NODE_ENV=production wepy build --no-cache",
 ```
 
 ## 发布npm包

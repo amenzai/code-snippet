@@ -288,3 +288,72 @@ const store = createStore(reducers, compose(
 	window.devToolsExtension?window.devToolsExtension():f=>f
 ))
 ```
+
+
+
+### 给XMLHttpRequests设置timeouts
+
+如果一个XHR需要花费太长时间，你可以终止链接（例如网络问题），通过给XHR使用setTimeout()解决。
+
+```js
+var xhr = new XMLHttpRequest (); 
+xhr.onreadystatechange = function () { 
+ if (this.readyState == 4) { 
+  clearTimeout(timeout); 
+  // 执行代码
+ } 
+} 
+var timeout = setTimeout( function () { 
+ xhr.abort(); // call error callback 
+}, 60*1000 /* 设置1分钟后执行*/ ); 
+xhr.open('GET', url, true); 
+  
+xhr.send();
+```
+
+### 处理WebSocket超时
+
+一般来说，当创建一个WebSocket链接时，服务器可能在闲置30秒后链接超时，在闲置一段时间后，防火墙也可能会链接超时。
+
+为了解决这种超时问题，你可以定期地向服务器发送空信息，在代码里添加两个函数：一个函数用来保持链接一直是活的，另一个用来取消链接是活的，使用这种方法，你将控制超时问题。
+
+添加一个timeID……
+
+```js
+var timerID = 0; 
+function keepAlive() { 
+ var timeout = 15000; 
+ if (webSocket.readyState == webSocket.OPEN) { 
+  webSocket.send(''); 
+ } 
+ timerId = setTimeout(keepAlive, timeout); 
+} 
+function cancelKeepAlive() { 
+ if (timerId) { 
+  clearTimeout(timerId); 
+ } 
+}
+```
+
+keepAlive()方法应该添加在WebSocket链接方法onOpen()的末端，cancelKeepAlive()方法放在onClose()方法下面。
+
+----
+
+很巧，我刚刚才做了这么个事情，说一下我的步骤吧：
+1、先把代码备份(你懂得)；
+2、安装npm-check；
+3、使用npm-check -u命令将依赖全部(尽量全部，你懂得)升级；
+4、使用最新版vue-cli创建一个demo项目；
+5、把demo项目的config和build两个目录，覆盖到你的项目中的这两个目录；
+6、运行npm run dev命令，查看错误，根据错误修改源码。(我的项目也就三个错误，还是因为div没有写结束标记</div>导致的)；
+7、祝好运。
+
+补充一下：
+执行npm run build时可能会提示缺少两个包，你执行npm install XXXX安装上就好了。
+
+---
+
+移动端字号行高：
+1.41176471 * 17
+1.5 * 16
+1.71428571 * 14
