@@ -1,0 +1,62 @@
+?为了解决文件修改时间不精确带来的问题，服务器和浏览器再次协商，这次不返回时间，返回文件的唯一标识ETag。只有当文件内容改变时，ETag才改变。请求过程如下：
+
+浏览器请求静态资源demo.js
+服务器读取磁盘文件demo.js，返给浏览器，同时带上文件的唯一标识ETag
+当浏览器上的缓存文件过期时，浏览器带上请求头If-None-Match（等于上一次请求的ETag）请求服务器
+服务器比较请求头里的If-None-Match和文件的ETag。如果一致就继续使用本地缓存（304），如果不一致就再次返回文件内容和ETag。
+循环请求。。
+
+const md5 = require('md5');
+
+app.get('/demo.js',(req, res)=>{
+    let jsPath = path.resolve(__dirname,'./static/js/demo.js');
+    let cont = fs.readFileSync(jsPath);
+    let etag = md5(cont);
+
+    if(req.headers['if-none-match'] === etag){
+        res.writeHead(304, 'Not Modified');
+        res.end();
+    } else {
+        res.setHeader('ETag', etag);
+        res.writeHead(200, 'OK');
+        res.end(cont);
+    }
+})
+复制代码??请求结果如下：
+
+作者：谢小飞
+链接：https://juejin.im/post/5b70edd4f265da27df0938bc
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。关于Pragma
+??当该字段值为no-cache的时候，会告诉浏览器不要对该资源缓存，即每次都得向服务器发一次请求才行。
+res.setHeader('Pragma', 'no-cache') //禁止缓存
+res.setHeader('Cache-Control', 'public,max-age=120') //2分钟
+复制代码??通过Pragma来禁止缓存，通过Cache-Control设置两分钟缓存，但是重新访问我们会发现浏览器会再次发起一次请求，说明了Pragma的优先级高于Cache-Control
+关于Cache-Control
+??我们看到Cache-Control中有一个属性是public，那么这代表了什么意思呢？其实Cache-Control不光有max-age，它常见的取值private、public、no-cache、max-age，no-store，默认值为private，各个取值的含义如下：
+
+private: 客户端可以缓存
+public: 客户端和代理服务器都可缓存
+max-age=xxx: 缓存的内容将在 xxx 秒后失效
+no-cache: 需要使用对比缓存来验证缓存数据
+no-store: 所有内容都不会缓存，强制缓存，对比缓存都不会触发
+
+??所以我们在刷新页面的时候，如果只按F5只是单纯的发送请求，按Ctrl+F5会发现请求头上多了两个字段Pragma: no-cache和Cache-Control: no-cache。
+缓存的优先级
+??上面我们说过强制缓存的优先级高于协商缓存，Pragma的优先级高于Cache-Control，那么其他缓存的优先级顺序怎么样呢？网上查阅了资料得出以下顺序（PS：有兴趣的童鞋可以验证一下正确性告诉我）：
+
+Pragma  >  Cache-Control  > Expires  > ETag  > Last-Modified
+
+如果觉得写得还不错，请关注我的掘金主页。更多文章请访问谢小飞的博客
+??参考资料：
+http缓存优先级问题
+彻底弄懂HTTP缓存机制及原理
+HTTP缓存控制小结
+浅谈浏览器http的缓存机制
+通过express框架简单实践几种设置HTTP对缓存的控制
+关注下面的标签，发现更多相似文章前端HTTP浏览器服务器掘金开发者大会 ? 微信小程序专场正式启动多位小程序一线的开发团队负责人、开源作者及行业领袖参会，为开发者带来一场关于微信小程序的盛会，早鸟票限时发售中！评论登录说说你的看法少说多做前端 @ 渣浪不知道怎么回事我抄你的代码，强制缓存始终不能成功。。但是协商缓存没问题01条评论15小时前深红前端非常好！01条评论15小时前lujs前端工程师 @ 沃亚旅行简单易懂01条评论16小时前think2cat前端鼓励师666  图解HTTP和图解TCP是不错的书01条评论17小时前wendy丫写的真好！01条评论19小时前展开全部相关推荐热专栏jerryOnlyZRJ1天前CSS网站性能优化实战——从12.67s到1.06s的故事48524微博微信扫一扫热专栏JserWang20小时前React.js前端工程不了解？带你踩坑加爬坑。1487微博微信扫一扫热专栏奇舞周刊1天前CSS天哪，工程师竟然沉迷上了种胡萝卜——CSS Grid 28关过关秘籍19815微博微信扫一扫
+
+作者：谢小飞
+链接：https://juejin.im/post/5b70edd4f265da27df0938bc
+来源：掘金
+著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。

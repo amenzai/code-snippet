@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>tets html</title>
+</head>
+<body>
+  <h1>hello word!</h1>
+</body>
+<script>
+  var xhr = new XMLHttpRequest()
+  xhr.open('GET', 'http://127.0.0.1:2002/')
+  xhr.send(null)
+  xhr.onload = function () {
+    console.log(JSON.parse(xhr.responseText))
+  }
+  // fetch('http://127.0.0.1:2002/', {
+  //   method: 'POST',
+  //   headers: {
+  //     'X-Test-Cors': '123'  // 自定义的头在跨域时不被允许
+  //   }
+  // })
+</script>
+<!-- <script src="/file.txt"></script> -->
+</html>
