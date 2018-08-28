@@ -203,6 +203,27 @@ export default
 如果模块默认输出一个函数，函数名的首字母应该小写。
 如果模块默认输出一个对象，对象名的首字母应该大写。
 ```
+**export 与 import 的复合写法**
+```js
+// foo和bar实际上并没有被导入当前模块，只是相当于对外转发了这两个接口，导致当前模块不能直接使用foo和bar
+export { foo, bar } from 'my_module';
+
+// 可以简单理解为
+import { foo, bar } from 'my_module';
+export { foo, bar };
+
+// ---
+// 具名接口改为默认接口的写法如下
+export { es6 as default } from './someModule';
+
+// 等同于
+import { es6 } from './someModule';
+export default es6;
+
+// ---
+// 默认接口也可以改名为具名接口。
+export { default as es6 } from './someModule';
+```
 
 ### 使用Eslint
 ```bash
