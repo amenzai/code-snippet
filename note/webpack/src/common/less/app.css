@@ -1,0 +1,9 @@
+h1 {
+  color: green;
+}
+
+p {
+  height: 200px;
+  background-image: url('../img/new.jpg');
+  display: flex;
+}
