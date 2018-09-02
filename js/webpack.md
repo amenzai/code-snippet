@@ -125,8 +125,8 @@ exports = module.exports = module1;
 **（3）AMD**
 参考：requireJS
 
-实现js文件的异步加载，避免网页失去响应；
-管理模块之间的依赖性，便于代码的编写和维护。
+- 实现js文件的异步加载，避免网页失去响应；
+- 管理模块之间的依赖性，便于代码的编写和维护。
 
 - Async Module Definition
 - 使用 define 定义模块
@@ -270,11 +270,11 @@ example:
 ## webpack 简介
 
 ### 概述
-资源按需加载（代码分割），loaders
-官网：https://webpack.js.org/
-中文官网： https://doc.webpack-china.org
-Version：V3.8.1
-Github： https://github.com/webpack/webpack
+- 资源按需加载（代码分割），loaders
+- 官网：https://webpack.js.org/
+- 中文官网： https://doc.webpack-china.org
+- Version：V3.8.1
+- Github： https://github.com/webpack/webpack
 
 ### 版本迭代
 github-release 版本更新日志
@@ -293,7 +293,7 @@ github-release 版本更新日志
   - 新的文档
 - V3
   - Scope Hoisting（作用域提升）：打包后代码性能提升
-  作用域提升（Scope Hositing ）是 Webpack 3 的标志性特征，老版本的 Webpack 需要将每个模块包裹在单独的函数闭包中以实现模块系统。而这些封装函数往往会使得浏览器中运行的 JavaScript 代码性能有所下降；而 Closure Compiler、RollupJS 这些构建工具则会将代码中所有的模块作用域连接到单一闭包中，从而保证了浏览器中的代码运行速度。
+    - 作用域提升（Scope Hositing ）是 Webpack 3 的标志性特征，老版本的 Webpack 需要将每个模块包裹在单独的函数闭包中以实现模块系统。而这些封装函数往往会使得浏览器中运行的 JavaScript 代码性能有所下降；而 Closure Compiler、RollupJS 这些构建工具则会将代码中所有的模块作用域连接到单一闭包中，从而保证了浏览器中的代码运行速度。
   - Magic Comments（配合动态import使用）：打包后的文件名
 
 ## 核心概念
@@ -507,8 +507,8 @@ touchCat({
 - 减少代码冗余
 - 提高加载速度
 
-CommonsChunkPlugin（适用于多entry的情况）
-webpack.optimize.CommonsChunkPlugin
+- CommonsChunkPlugin（适用于多entry的情况）
+- webpack.optimize.CommonsChunkPlugin
 
 ```js
 // 配置
@@ -810,18 +810,22 @@ npm i babel-plugin-lodash --save-dev
 ```
 
 **CSS Tree Shaking**
+
 Purify CSS(https://github.com/purifycss/purifycss)
 - purifycss-webpack
 - glob-all
 
 ### 文件处理
+
 **图片处理**
+
 - file-loader
 - url-loader
 - img-loader
 - postcss-sprites
 
 **字体文件**
+
 - file-loader
 - url-loader
 
@@ -841,9 +845,13 @@ html-webpack-inline-chunk-plugin：配合 html-webpack-plugin 使用，将插入
 
 ## 搭建开发环境
 clean-webpack-plugin
+
 webpack watch mode: webpack -watch
+
 webpack-dev-server
+
 express + webpack-dev-middleware
+
 - 模块热更新
   - devServer.hot
   - webpack.HotModuleReplacementPlugin
@@ -863,7 +871,9 @@ express + webpack-dev-middleware
 生产环境：提取公用代码、压缩混淆、文件压缩 或 BASE64 编码、去除无用代码；
 
 共同点：同样的入口，同样的代码处理，同样的解析配置
+
 how区别：webpack-merge
+
 webpack.dev.conf.js webpack.prod.conf.js webpack.common.conf.js
 
 ## 打包结果分析
@@ -990,4 +1000,5 @@ npm i less less-loader react-hot-loader --save
 7、祝好运。
 
 补充一下：
+
 执行npm run build时可能会提示缺少两个包，你执行npm install XXXX安装上就好了。
