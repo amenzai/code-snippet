@@ -614,7 +614,7 @@ $ babel src -d lib -s
 ```bash
 npm install eslint babel-eslint --save-dev 
 
-# .eslint
+# .eslintrc
 {
   "parser": "babel-eslint",
   "rules": {
@@ -624,15 +624,18 @@ npm install eslint babel-eslint --save-dev
 
 # package.json
 {
-    "name": "my-module",
-    "scripts": {
-      "lint": "eslint my-files.js"
-    },
-    "devDependencies": {
-      "babel-eslint": "...",
-      "eslint": "..."
-    }
+  "name": "my-module",
+  "scripts": {
+    "lint": "eslint my-files.js"
+  },
+  "devDependencies": {
+    "babel-eslint": "...",
+    "eslint": "..."
   }
+}
+
+# eslint --ext .js,.vue src         eslint src下的对应文件
+# eslint --fix --ext .js,.vue src  自动修复eslint报错
 ```
 
 ## good-storage

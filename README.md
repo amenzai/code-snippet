@@ -29,6 +29,7 @@
   - [JS中两个大数求和&小数的加减乘除](./js/jsComputed.md)
   - [Wepy基础](./js/wepyBase.md)
   - [小程序常用API 基于Wepy](./js/wepy.md)
+  - [mpvue](./js/mpvue.md)
   - [fileApi](./js/fileApi.md)
 - [css](./css)
   - [resetCSS](./css/resetCss.md)
