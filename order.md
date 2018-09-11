@@ -318,13 +318,13 @@ git checkout -- readme.txt
 git checkout .  # 用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
 
 # 创建远程分支
-git push origin [local_branch]:[remote_branch]
-# 在本地创建和远程分支对应的分支
-git checkout -b branch-name [remote-branch]
+git push origin [remote-branch-name]
+# 在本地创建和远程分支对应的分支(前提本地没有对应分支)
+git checkout [remote-branch-name]
 # 新建一个分支，与指定的远程分支建立追踪关系
-git branch --track [branch] [remote-branch] 
-# 建立追踪关系，在现有分支与指定的远程分支之间
-git branch --set-upstream branch-name [remote-branch] 
+git branch --track [branch] [remote-branch-name] 
+# 建立追踪关系，在当前分支与指定的远程分支之间
+git push --set-upstream origin [remote-branch-name] 
 
 # 合并指定分支到当前分支
 git merge dev 
