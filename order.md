@@ -413,6 +413,7 @@ npm list
 npm list -global 
 
 npm config set registry https://registry.npm.taobao.org/
+npm config set registry http://registry.npmjs.org
 npm config get registry
 
 # 更新
