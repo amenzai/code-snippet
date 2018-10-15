@@ -12,7 +12,7 @@ http.createServer(function (request, response) {
       "Access-Control-Allow-Methods": "GET, POST, PUT",
       "Access-Control-Max-Age": "1728000"
     });
-    response.end('2002 content');
+    response.end('8100 content');
   } else {
     response.writeHead(200, {
       "Content-Type": "text/plain"
@@ -20,5 +20,5 @@ http.createServer(function (request, response) {
     response.end('123');
   }
 
-}).listen(2002);
-console.log('listen in 2002')
+}).listen(8100);
+console.log('listen in 8100')
