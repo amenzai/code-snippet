@@ -178,22 +178,22 @@ legend {
   font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
   font-size: 14px;
   line-height: 1.42857143;
-  color: @txtC;
+  color: @pageTextC;
   outline: 0;
   border: 0;
 }
 
 body {
-  background: #fff;
+  background: @pageBgc;
 }
 
 a {
-  color: @txtC;
+  color: @pageTextC;
   .setTapColor();
 }
 
 a:hover {
-  color: @yellow;
+  color: @mainC;
 }
 
 // add
@@ -209,19 +209,15 @@ a:hover {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 ::-webkit-input-placeholder {
-  color: #999;
+  color: #C0C4CC;
 }
-
 :-moz-placeholder {
-  color: #999;
+  color: #C0C4CC;
 }
-
 ::-moz-placeholder {
-  color: #999;
+  color: #C0C4CC;
 }
-
 :-ms-input-placeholder {
-  color: #ccc;
+  color: #C0C4CC;
 }

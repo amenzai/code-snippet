@@ -2,12 +2,17 @@
 <html lang="zh-cn">
 
 <head>
-  @include('src/template/header.inc',{ "title":"首页" })
-  <link rel="stylesheet" href="/css/index.css">
+  @include('head.inc',{ "title":"首页" })
+  <link rel="stylesheet" href="./css/index.css">
+  <link rel="stylesheet" href="./lib/swiper/css/swiper.min.css">
 </head>
 
 <body class="home-page">
-  @include('src/template/footer.inc')
+  @include('header.inc',{ "active":"index" })
+  <div>
+    index
+  </div>
+  @include('footer.inc')
 </body>
 
 </html>

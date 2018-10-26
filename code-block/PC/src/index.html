@@ -2,12 +2,20 @@
 <html lang="zh-cn">
 
 <head>
-  @include('src/template/header.inc',{ "title":"首页" })
-  <link rel="stylesheet" href="/css/index.css">
+  @include('head.inc',{ "title":"首页" })
+  <link rel="stylesheet" href="./css/home.css">
+  <link rel="stylesheet" href="./lib/swiper/css/swiper.min.css">
 </head>
 
-<body class="home-page">
-  @include('src/template/footer.inc')
+<body>
+  @include('header.inc',{ "active":"index" })
+  <div>home</div>
+  @include('sidebar.inc')
+  @include('footer.inc') 
+  <script src="./lib/swiper/js/swiper.min.js"></script>
+  <script>
+    console.log(index);
+  </script>
 </body>
 
 </html>

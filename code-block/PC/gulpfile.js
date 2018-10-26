@@ -121,6 +121,12 @@ function lib() {
 
 function images() {
   return gulp.src(paths.images.src)
+    .pipe(gulp.dest(paths.images.dest))
+    .pipe($.connect.reload())
+}
+
+function imagesProd() {
+  return gulp.src(paths.images.src)
     .pipe($.plumber())
     .pipe($.imagemin())
     .pipe(gulp.dest(paths.images.dest))
@@ -207,7 +213,7 @@ function watch() {
   gulp.watch([paths.html.src, paths.template.src], htmlCompile);
 }
 
-const build = gulp.series(clean, config, htmlCompileProd, gulp.parallel(styleProd, scriptProd, lib, images), revReplace);
+const build = gulp.series(clean, config, htmlCompileProd, gulp.parallel(styleProd, scriptProd, lib, imagesProd), revReplace);
 const dev = gulp.series(clean, config, htmlCompile, gulp.parallel(style, script, lib, images), gulp.parallel(serve, watch));
 
 gulp.task('dev', dev);

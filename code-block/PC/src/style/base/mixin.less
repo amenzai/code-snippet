@@ -1,3 +1,4 @@
+@import 'var';
 // 单行省略号
 .text-overflow() {
   white-space: nowrap;
@@ -28,6 +29,24 @@
   }
 }
 
+// demo
 .shadow() {
-  box-shadow: 0px 0px 10px 0px rgba(255, 135, 0, 0.74);
+  box-shadow: 0 0 16px 0 rgba(7, 17, 27, .1);
+}
+
+// button mix
+.mix-btn(@bgc: @mainC) {
+  background-color: @bgc;
+  color: #fff;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+}
+.mix-line-btn(@bdc: @bdc) {
+  border: 1px solid @bdc;
+  color: @txtC;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+  background-color: #fff;
 }
