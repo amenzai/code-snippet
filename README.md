@@ -21,7 +21,7 @@
   - [Wepy基础](./js/wepyBase.md)
   - [小程序常用API 基于Wepy](./js/wepy.md)
   - [前端路由原理](./js/routerBase.md)
-  - [一些代码段](./js/usely-code.md)
+  - [一些代码段](./usely-code.md)
 - [css](./css)
   - [resetCSS](./css/resetCss.md)
   - [音乐APP Less文件](./css/music-appCss.md)
