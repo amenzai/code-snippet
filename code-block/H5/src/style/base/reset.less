@@ -79,7 +79,6 @@ abbr {
 
 img {
   border: 0 none;
-  width: auto\9;
   max-width: 100%;
   vertical-align: top;
   height: auto;
@@ -135,6 +134,15 @@ textarea {
   resize: none;
 }
 
+//清除输入框内阴影
+input,
+select,
+textarea {
+  border: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 label,
 summary {
   cursor: default;
@@ -182,6 +190,7 @@ legend {
   outline: 0;
   border: 0;
 }
+
 
 body {
   background: @pageBgc;
