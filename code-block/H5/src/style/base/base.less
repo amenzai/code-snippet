@@ -11,11 +11,6 @@
   clear: both;
 }
 
-.clearfix {
-  overflow: hidden;
-  *zoom: 1;
-}
-
 .fl {
   float: left;
 }
@@ -28,6 +23,17 @@
   color: @gray;
 }
 
+// disabled select
+.user-select-none {
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all （移动端不需要） */
+  -ms-user-select: none;      /* IE 10+ */      
+}
+
+// 禁止选中
+img { -webkit-touch-callout: none; }
+
+// 两栏网格
 .gjc-row {
   margin: -5px;
   .mix-clearfix();
@@ -39,6 +45,8 @@
   }
 }
 
+
+// table
 .gjc-table {
   width: 100%;
   max-width: 100%;
