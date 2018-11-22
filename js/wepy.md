@@ -50,6 +50,11 @@ wepy.authorize({
   console.log(res)
 })
 
+// 打开设置
+wepy.openSetting().then(res => {
+  console.log(res)
+})
+
 // 转发
 wepy.showShareMenu({
   withShareTicket: true
