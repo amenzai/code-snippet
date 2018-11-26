@@ -202,7 +202,7 @@ body, html {
 }
 ```
 
-11、PC css reset 
+**11、PC css reset** 
 
 https://necolas.github.io/normalize.css/
 
@@ -250,4 +250,16 @@ img {
 .mb20 {
   margin-bottom: 20px;
 }
+```
+12、弹出QQ
+```js
+$('.qqbox').on('click', 'p', function() {
+   var qqnumber = $(this).data('qn');
+   window.open("http://wpa.qq.com/msgrd?v=3&uin=" + qqnumber + "&site=qq&menu=yes");
+});
+$('#gotop').click(function() {
+  $('html, body').animate({
+    scrollTop: 0
+  }, 500)
+});
 ```
