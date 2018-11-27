@@ -474,4 +474,65 @@ function getAreaInfo(childCode) {
   }
   return str;
 }
+
+function setCookie(name, value, exdays) {
+  exdays = exdays || 1;
+  var d = new Date();
+  d.setDate(d.getDate() + exdays);
+  var expires = "expires=" + d.toUTCString();
+  document.cookie = name + "=" + value + "; " + expires;
+}
+
+function getCookie(name) {
+  var reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+  var arr = document.cookie.match(reg)
+  if (arr) {
+    return decodeURIComponent(arr[2]);
+  } else {
+    return null;
+  }
+}
+
+function delCookie(name) {
+  setCookie(name, "", -1);
+}
+```
+
+**14、tabjs**
+```js
+$('.tabnav').on('click', 'li', function(event) {
+  var targetSelector = '#' + $(this).data('target');
+  $(this).addClass('active').siblings().removeClass('active');
+  $(targetSelector).addClass('active').siblings().removeClass('active');
+});
+```
+**15、toTop**
+```js
+// 回到顶部
+ // $('.gotop').click(function() {
+ //   $('html, body').animate({scrollTop: 0}, 300)
+ // });
+// 原生实现
+ var leader = 0,
+   target = 0,
+   timerOut = null,
+   timer = null;
+ // leader 起始位置  target  目标位置
+ window.onscroll = function() {
+   clearTimeout(timerOut)
+   timerOut = setTimeout(() => {
+     console.log(123);
+     leader = document.documentElement.scrollTop; // 把 卷去的头部 给  起始位置
+   }, 100);
+
+ }
+ $('.gotop').click(function() {
+   timer = setInterval(function() {
+     leader = leader + (target - leader) / 10;
+     window.scrollTo(0, leader); // 去往页面中的某个位置
+     if (leader == target) {
+       clearInterval(timer);
+     }
+   }, 20);
+ });
 ```
