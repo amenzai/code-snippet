@@ -1,0 +1,58 @@
+/* 垂直居中 */
+
+.mix-flex-y-center () {
+  display: flex;
+  align-items: center;
+}
+
+/* 水平居中 */
+
+.mix-flex-x-center () {
+  display: flex;
+  justify-content: center;
+}
+
+/* 水平垂直居中 */
+
+.mix-flex-center () {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 超出部分出省略号 */
+
+.text-overflow () {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+/* 多行文本超出部分省略号 */
+
+.text-overflow-line(@line: 2) {
+  display: -webkit-box;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+}
+
+// 扩展点击区域
+.extend-click() {
+  position: relative;
+  &:before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+  }
+}
+
+// native scroll
+.scroll() {
+  overflow: auto; /* auto | scroll */
+  -webkit-overflow-scrolling: touch;
+}

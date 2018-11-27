@@ -1,0 +1,15 @@
+{
+  "cultModel": {
+    "description": "栽培模式",
+    "options": [{
+      "label": "经济效益优先模式",
+      "value": "1"
+    }, {
+      "label": "速率优先模式",
+      "value": "2"
+    }, {
+      "label": "采收期确定模式",
+      "value": "3"
+    }]
+  }
+}

@@ -1,0 +1,190 @@
+/* reset
+-------------- */
+html,
+body {
+  font-family: 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback';
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  font-size: 14px; // background-color: #fbf9fe;
+  background-color: #efeff4;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+p,
+blockquote,
+pre,
+hr,
+figure,
+table,
+caption,
+th,
+td,
+form,
+fieldset,
+legend,
+input,
+button,
+textarea,
+menu {
+  margin: 0;
+  padding: 0;
+}
+
+a,
+a:link,
+a:active,
+a:visited {
+  color: #333;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+img {
+  vertical-align: middle;
+}
+
+
+/* Utils
+------------------------------ */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after {
+  clear: both;
+}
+.fr {
+  float: right;
+}
+
+.tc {
+  text-align: center;
+}
+
+.tr {
+  text-align: right;
+}
+
+.blue {
+  color: @blue;
+}
+
+.green {
+  color: @green;
+}
+
+.yellow {
+  color: @yellow;
+}
+
+.gray {
+  color: #999;
+  font-size: 12px;
+}
+
+.mt10 {
+  margin-top: 10px;
+}
+
+.mb10 {
+  margin-bottom: 10px;
+}
+
+.mt20 {
+  margin-top: 20px;
+}
+
+.p15 {
+  padding: 10px 15px 0;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-item {
+  flex: 1;
+  +.flex-item {
+    margin-left: 10px
+  }
+}
+
+.cell-item-title {
+  padding: 8px 15px 4px;
+}
+
+/* Animation
+------------------------------ */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+
+/* Reset vant-ui
+------------------------------ */
+// .van-nav-bar {
+//   background-color: @blue;
+//   color: #fff;
+//   .van-icon {
+//     color: #fff;
+//   }
+// }
+// .van-nav-bar__text {
+//   color: #fff;
+// }
+.van-field .van-cell__title {
+  max-width: 120px;
+}
+
+.van-tabbar--fixed {
+  z-index: 2;
+}
+
+.van-cell__value {
+  font-size: 12px;
+  color: #999;
+}
+
+[class*=van-hairline]::after {
+  border-color: #D9D9D9;
+}
+
+.van-button--default {
+  border-color: #ddd;
+}
+
+.van-tabs__nav--card {
+  border-color: @blue;
+  .van-tab {
+    border-right-width: 0;
+    &.van-tab--active {
+      background-color: @blue;
+    }
+  }
+}

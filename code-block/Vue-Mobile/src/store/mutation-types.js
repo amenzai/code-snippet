@@ -1,0 +1,3 @@
+export const UPDATE_LOADING = 'UPDATE_LOADING'
+export const UPDATE_USER = 'UPDATE_USER'
+export const UPDATE_ORDER = 'UPDATE_ORDER'
