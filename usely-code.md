@@ -536,3 +536,148 @@ $('.tabnav').on('click', 'li', function(event) {
    }, 20);
  });
 ```
+
+## close icon
+
+```less
+.vux-close {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  color: #999;
+  width: 24px;
+  height: 24px;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 11px;
+    width: 24px;
+    height: 1px;
+    background-color: currentColor;
+    transform: rotate(-45deg);
+  }
+  &:after {
+    transform: rotate(45deg);
+  }
+}
+```
+
+## down-arrow
+
+```less
+.down-arrow {
+    position: relative;
+    display: inline-block;
+    height: 8px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-top: 8px solid yellow;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+    }
+	
+    &:after {
+        content: '';
+        position: absolute;
+        left: 2px;
+        top: 0;
+        border-top: 6px solid #fff; // 此处颜色设置为所在容器的背景色
+        border-left: 6px solid transparent;
+        border-right: 6px solid transparent;
+    }
+}
+```
+
+## loading
+
+```less
+.vux-loading {
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-name: vux-loading;
+  animation-timing-function: linear;
+  border-radius: 99em;
+  border: 3px solid #DDD;
+  border-left-color: #666;
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+@keyframes vux-loading {
+  from {
+    transform: rotate(0deg)
+  }
+
+  to {
+    transform: rotate(360deg)
+  }
+}
+```
+
+## reddot
+
+```less
+.vux-reddot,
+.vux-reddot-border,
+.vux-reddot-s {
+  position: relative;
+}
+
+.vux-reddot:after,
+.vux-reddot-border:after,
+.vux-reddot-s:after {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #f74c31;
+  border-radius: 5px;
+  right: -3px;
+  top: -3px;
+  background-clip: padding-box;
+}
+
+.vux-reddot-border:before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: #fff;
+  border-radius: 5px;
+  right: -4px;
+  top: -4px;
+  background-clip: padding-box;
+  padding: 1px;
+}
+
+.vux-reddot-s:after {
+  width: 6px;
+  height: 6px;
+  top: -5px;
+  right: -5px;
+}
+```
+
+## tap
+
+```less
+.vux-tap-active {
+  tap-highlight-color: rgba(0,0,0,0);
+  user-select:none;
+}
+.vux-tap-active:active {
+  background-color: #ECECEC;
+}
+```
