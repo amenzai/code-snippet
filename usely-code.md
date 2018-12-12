@@ -519,12 +519,12 @@ $('.tabnav').on('click', 'li', function(event) {
    timer = null;
  // leader 起始位置  target  目标位置
  window.onscroll = function() {
-   clearTimeout(timerOut)
-   timerOut = setTimeout(() => {
-     console.log(123);
+   if (timerOut) {
+     clearTimeout(timerOut)
+   }
+   timerOut = setTimeout(function() {
      leader = document.documentElement.scrollTop; // 把 卷去的头部 给  起始位置
    }, 100);
-
  }
  $('.gotop').click(function() {
    timer = setInterval(function() {
