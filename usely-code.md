@@ -360,8 +360,8 @@ function seeLabel(value, arr) {
   if (!arr) return '';
   let result = '';
   for (let i = 0; i < arr.length; i++) {
-    if (arr[i].itemCode === value) {
-      result = arr[i].itemName;
+    if (arr[i].value === value) {
+      result = arr[i].label;
       break;
     }
   }
